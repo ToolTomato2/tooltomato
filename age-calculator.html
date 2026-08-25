@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator — Calculate Your Exact Age | ToolTomato</title>
+<meta name="description" content="Free online age calculator. Calculate your exact age in years, months and days, plus your next birthday and total days lived.">
+<link rel="canonical" href="https://tooltomato2.github.io/tooltomato/age-calculator.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Age Calculator — ToolTomato">
+<meta property="og:description" content="Calculate your exact age in years, months and days with ToolTomato's free age calculator.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.tool-hero{padding:42px 20px 20px;text-align:center}
+.tool-hero .eyebrow{display:inline-flex;background:var(--stem-light);color:var(--stem);padding:6px 14px;border-radius:999px;font-size:.8rem;font-weight:700;text-transform:uppercase}
+.tool-hero h1{font-size:clamp(2rem,5vw,3rem);margin:16px 0 8px}
+.tool-hero p{max-width:620px;margin:0 auto;color:var(--ink-soft)}
+.calculator-wrap{max-width:720px;margin:0 auto;padding:20px}
+.calc-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-card)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field label{display:block;font-weight:700;margin-bottom:7px}
+.field input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;color:var(--ink)}
+.calc-actions{display:flex;gap:10px;margin-top:20px}
+.calc-btn{border:0;border-radius:999px;padding:12px 20px;background:var(--tomato);color:#fff;font:700 1rem var(--font-body);cursor:pointer}
+.reset-btn{border:1px solid var(--line);border-radius:999px;padding:12px 20px;background:#fff;color:var(--ink);font:700 1rem var(--font-body);cursor:pointer}
+.result{display:none;margin-top:22px}
+.result.show{display:block}
+.result-main{background:var(--stem-light);border-left:4px solid var(--stem);padding:18px;border-radius:10px}
+.result-main .age-number{font:800 1.7rem var(--font-display);margin-bottom:4px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.stat{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}
+.stat strong{display:block;font-size:1.05rem}
+.stat span{font-size:.8rem;color:var(--ink-soft)}
+.error{display:none;margin-top:14px;background:#FFF3E0;border-left:4px solid var(--gold);padding:12px 15px;border-radius:8px;color:#6B4E00}
+.error.show{display:block}
+.content-section{max-width:820px;margin:0 auto;padding:20px}
+.content-section h2{font-size:1.35rem;margin-top:28px}
+.content-section p,.content-section li{color:#3A322F;font-size:.95rem}
+.faq{border-top:1px solid var(--line);padding:14px 0}
+.faq h3{font-size:1rem;margin-bottom:5px}
+@media(max-width:600px){
+  .form-grid,.stats{grid-template-columns:1fr}
+  .calc-card{padding:18px}
+  .calc-actions{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="brand"><span class="seal">🍅</span> Tool<span class="tomato-text">Tomato</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html#calculators">Calculators</a>
+      <a href="index.html#image-tools">Image Tools</a>
+      <a href="index.html#pdf-tools">PDF Tools</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="tool-hero">
+  <span class="eyebrow">Free · No Sign-up</span>
+  <h1>Age Calculator</h1>
+  <p>Enter your date of birth and calculate your exact age in years, months and days.</p>
+</section>
+
+<main class="calculator-wrap">
+  <div class="calc-card">
+    <div class="form-grid">
+      <div class="field">
+        <label for="dob">Date of birth</label>
+        <input id="dob" type="date" autocomplete="bday">
+      </div>
+      <div class="field">
+        <label for="asof">Calculate age as of</label>
+        <input id="asof" type="date">
+      </div>
+    </div>
+
+    <div class="calc-actions">
+      <button class="calc-btn" id="calculate" type="button">Calculate Age</button>
+      <button class="reset-btn" id="reset" type="button">Reset</button>
+    </div>
+
+    <div class="error" id="error" role="alert"></div>
+
+    <section class="result" id="result" aria-live="polite">
+      <div class="result-main">
+        <div class="age-number" id="exact-age"></div>
+        <div id="birthday-message"></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong id="next-birthday"></strong><span>Next birthday</span></div>
+        <div class="stat"><strong id="days-to-birthday"></strong><span>Days until next birthday</span></div>
+        <div class="stat"><strong id="total-months"></strong><span>Approx. total months</span></div>
+        <div class="stat"><strong id="total-days"></strong><span>Total days</span></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<section class="content-section">
+  <div class="notice">This calculator is for general informational purposes. Dates and results are estimates based on the dates you enter and should not be used as official proof of age.</div>
+
+  <h2>How to use the Age Calculator</h2>
+  <ol>
+    <li>Enter your date of birth.</li>
+    <li>Choose the date you want to calculate your age as of.</li>
+    <li>Tap <strong>Calculate Age</strong>.</li>
+    <li>Your exact age, next birthday and other date-based results will appear instantly.</li>
+  </ol>
+
+  <h2>What does the calculator show?</h2>
+  <p>The main result gives your age in complete years, months and days. It also shows your next birthday, the number of days until that birthday, approximate total months and the total number of elapsed days between the two dates.</p>
+
+  <h2>Frequently asked questions</h2>
+  <div class="faq">
+    <h3>How is exact age calculated?</h3>
+    <p>The calculator compares your birth date with the selected calculation date and accounts for different month lengths and leap years.</p>
+  </div>
+  <div class="faq">
+    <h3>Can I calculate age for a past date?</h3>
+    <p>Yes. Select any valid date after your date of birth in the “Calculate age as of” field.</p>
+  </div>
+  <div class="faq">
+    <h3>Does the calculator work for leap-year birthdays?</h3>
+    <p>Yes. The calculation handles leap years and February dates using calendar-based date arithmetic.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <h4>🍅 ToolTomato</h4>
+      <p style="color:#C9BDB8;font-size:0.85rem;max-width:320px;">Free online tools — calculators, image & PDF utilities. No sign-up, no cost, runs right in your browser.</p>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="dmca.html">DMCA Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ToolTomato. All rights reserved.</span>
+    <span>Made with 🍅 for quick everyday calculations.</span>
+  </div>
+</footer>
+
+<div id="cookie-banner">
+  <p>We use cookies to improve your experience and, in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p>
+  <div class="actions">
+    <button id="cookie-decline">Decline</button>
+    <button id="cookie-accept">Accept</button>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+(function(){
+  const dob = document.getElementById('dob');
+  const asof = document.getElementById('asof');
+  const result = document.getElementById('result');
+  const error = document.getElementById('error');
+
+  function localDateISO(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth()+1).padStart(2,'0');
+    const d = String(date.getDate()).padStart(2,'0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function parseISO(value) {
+    const parts = value.split('-').map(Number);
+    if (parts.length !== 3 || parts.some(Number.isNaN)) return null;
+    const [y,m,d] = parts;
+    const date = new Date(y,m-1,d);
+    if (date.getFullYear() !== y || date.getMonth() !== m-1 || date.getDate() !== d) return null;
+    return date;
+  }
+
+  function daysBetween(a,b) {
+    const utcA = Date.UTC(a.getFullYear(),a.getMonth(),a.getDate());
+    const utcB = Date.UTC(b.getFullYear(),b.getMonth(),b.getDate());
+    return Math.round((utcB-utcA)/86400000);
+  }
+
+  function addYearsClamped(date, years) {
+    const y = date.getFullYear()+years;
+    const m = date.getMonth();
+    const last = new Date(y,m+1,0).getDate();
+    return new Date(y,m,Math.min(date.getDate(),last));
+  }
+
+  function calculate(){
+    error.classList.remove('show');
+    result.classList.remove('show');
+
+    const birth = parseISO(dob.value);
+    const end = parseISO(asof.value);
+
+    if (!birth || !end) {
+      error.textContent = 'Please enter both dates.';
+      error.classList.add('show');
+      return;
+    }
+    if (birth > end) {
+      error.textContent = 'The date of birth cannot be after the calculation date.';
+      error.classList.add('show');
+      return;
+    }
+
+    let years = end.getFullYear() - birth.getFullYear();
+    let anniversary = addYearsClamped(birth, years);
+    if (anniversary > end) {
+      years--;
+      anniversary = addYearsClamped(birth, years);
+    }
+
+    let months = end.getMonth() - anniversary.getMonth();
+    if (months < 0) months += 12;
+
+    let monthAnchor = new Date(anniversary.getFullYear(), anniversary.getMonth()+months, anniversary.getDate());
+    if (monthAnchor > end) {
+      months--;
+      if (months < 0) { months = 11; years--; }
+      monthAnchor = new Date(anniversary.getFullYear(), anniversary.getMonth()+months, anniversary.getDate());
+    }
+
+    const days = daysBetween(monthAnchor,end);
+    const totalDays = daysBetween(birth,end);
+    const totalMonths = years * 12 + months + (days / 30.4375);
+
+    const birthdayThisYear = new Date(end.getFullYear(), birth.getMonth(), birth.getDate());
+    if (birthdayThisYear < end) birthdayThisYear.setFullYear(end.getFullYear()+1);
+
+    // Handle Feb 29 birthdays in non-leap years by treating Feb 28 as the calendar birthday.
+    if (birth.getMonth() === 1 && birth.getDate() === 29 && !((birthdayThisYear.getFullYear()%4===0 && birthdayThisYear.getFullYear()%100!==0) || birthdayThisYear.getFullYear()%400===0)) {
+      birthdayThisYear.setDate(28);
+    }
+
+    const daysToBirthday = daysBetween(end,birthdayThisYear);
+    const dateLabel = birthdayThisYear.toLocaleDateString(undefined,{day:'numeric',month:'long',year:'numeric'});
+
+    document.getElementById('exact-age').textContent =
+      years + ' year' + (years===1?'':'s') + ', ' +
+      months + ' month' + (months===1?'':'s') + ', ' +
+      days + ' day' + (days===1?'':'s');
+
+    document.getElementById('birthday-message').textContent =
+      daysToBirthday === 0 ? '🎉 Happy birthday!' : 'Your next birthday is on ' + dateLabel + '.';
+
+    document.getElementById('next-birthday').textContent = dateLabel;
+    document.getElementById('days-to-birthday').textContent = daysToBirthday + ' day' + (daysToBirthday===1?'':'s');
+    document.getElementById('total-months').textContent = totalMonths.toFixed(1);
+    document.getElementById('total-days').textContent = totalDays.toLocaleString();
+
+    result.classList.add('show');
+  }
+
+  function reset(){
+    dob.value = '';
+    asof.value = localDateISO(new Date());
+    result.classList.remove('show');
+    error.classList.remove('show');
+  }
+
+  asof.value = localDateISO(new Date());
+  document.getElementById('calculate').addEventListener('click',calculate);
+  document.getElementById('reset').addEventListener('click',reset);
+})();
+</script>
+</body>
+</html>

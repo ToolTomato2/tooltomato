@@ -59,12 +59,10 @@
 <div id="cookie-banner"><p>We use cookies to improve your experience, and in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div>
 
 <script src="js/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs" type="module"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
-<script type="module">
-import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const pdfjsLib = window.pdfjsLib;
 
 const $ = id => document.getElementById(id);
 let file = null, outputURL = null, level = "basic";
@@ -133,7 +131,7 @@ $("process").addEventListener("click", async () => {
   try {
     progress(5, "Opening PDF…");
     const data = new Uint8Array(await file.arrayBuffer());
-    const source = await pdfjsLib.getDocument({ data }).promise;
+    const source = await pdfjsLib.getDocument({ data, disableWorker: true, useWorkerFetch: false, isEvalSupported: true }).promise;
     const cfg = settings[level];
 
     const { jsPDF } = window.jspdf;
@@ -204,7 +202,15 @@ $("process").addEventListener("click", async () => {
     progress(100, "Finished.");
   } catch (err) {
     console.error(err);
-    setError("Compression failed. This PDF may be encrypted, damaged, or too complex for browser processing.");
+    let msg = "Compression failed. Please try another PDF.";
+    if (err && /password|encrypted/i.test(String(err.message || err.name))) {
+      msg = "This PDF is password-protected/encrypted. Please remove the password and try again.";
+    } else if (err && /InvalidPDF|InvalidPDFException|FormatError/i.test(String(err.message || err.name))) {
+      msg = "This PDF appears damaged or uses a format this browser compressor cannot read.";
+    } else if (err && /memory|allocation|ArrayBuffer/i.test(String(err.message || err.name))) {
+      msg = "This PDF is too large or complex for browser processing on this device. Try a smaller PDF.";
+    }
+    setError(msg);
   } finally {
     $("process").disabled = false;
   }

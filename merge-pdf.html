@@ -1,7 +1,153 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Merge PDF | ToolTomato</title><meta name="description" content="Combine multiple PDF files into one."><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/style.css"><script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script><style>
-.tool-hero{padding:42px 20px 20px;text-align:center}.tool-hero h1{font-size:clamp(2rem,5vw,3rem)}.tool-hero p{max-width:700px;margin:auto;color:var(--ink-soft)}.wrap{max-width:850px;margin:auto;padding:20px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-card)}.drop{border:2px dashed var(--line);border-radius:16px;padding:38px;text-align:center;background:#fff;cursor:pointer}.choose,.btn,.download a{display:inline-block;margin-top:12px;background:var(--tomato);color:#fff;border:0;border-radius:999px;padding:11px 20px;font-weight:700;text-decoration:none;cursor:pointer}.controls{display:none;margin-top:20px}.controls.show{display:block}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field label{display:block;font-weight:700;margin-bottom:6px}.field input,.field select{width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit}.actions{display:flex;gap:10px;margin-top:18px}.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}.preview,.download{display:none;margin-top:20px}.preview.show,.download.show{display:block}.preview img{max-width:100%;max-height:400px;display:block;margin:auto;border:1px solid var(--line);border-radius:10px}.stats{margin-top:15px;padding:14px;background:var(--stem-light);border-left:4px solid var(--stem);border-radius:10px}.error{display:none;margin-top:14px;padding:12px;background:#FFF3E0;border-left:4px solid var(--gold);border-radius:8px}.error.show{display:block}.content{max-width:850px;margin:auto;padding:20px}@media(max-width:650px){.grid{grid-template-columns:1fr}.actions{flex-direction:column}}
-</style></head><body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merge PDF — Free Online | ToolTomato</title>
+<meta name="description" content="Combine multiple PDF files into one PDF directly in your browser.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.tool-hero{padding:42px 20px 20px;text-align:center}.tool-hero h1{font-size:clamp(2rem,5vw,3rem)}.tool-hero p{max-width:700px;margin:auto;color:var(--ink-soft)}
+.wrap{max-width:850px;margin:auto;padding:20px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-card)}
+.drop{border:2px dashed var(--line);border-radius:16px;padding:38px 20px;text-align:center;background:#fff;cursor:pointer}.drop.drag{border-color:var(--tomato);background:#fff7f3}.drop h2{margin:0 0 8px}.drop p{color:var(--ink-soft)}.choose{display:inline-block;background:var(--tomato);color:#fff;border-radius:999px;padding:11px 20px;font-weight:700;cursor:pointer}
+.controls{display:none;margin-top:20px}.controls.show{display:block}.file-list{margin-top:15px}.file-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;margin:7px 0}.file-row .name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.move{border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 8px;cursor:pointer}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:999px;padding:12px 20px;font:700 1rem var(--font-body);background:var(--tomato);color:#fff;cursor:pointer}.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}.error{display:none;margin-top:14px;padding:12px 15px;background:#FFF3E0;border-left:4px solid var(--gold);border-radius:8px}.error.show{display:block}.download{display:none;margin-top:20px;text-align:center}.download.show{display:block}.download a{display:inline-block;background:var(--tomato);color:#fff;border-radius:999px;padding:12px 22px;font-weight:700;text-decoration:none}.info{margin-top:12px;color:var(--ink-soft);font-size:.9rem}
+@media(max-width:650px){.card{padding:18px}.actions{flex-direction:column}.file-row{flex-wrap:wrap}}
+</style>
+</head>
+<body>
 <header class="site-header"><div class="nav-wrap"><a href="index.html" class="brand"><span class="seal">🍅</span> Tool<span class="tomato-text">Tomato</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><nav class="main-nav"><a href="index.html#calculators">Calculators</a><a href="index.html#image-tools">Image Tools</a><a href="index.html#pdf-tools">PDF Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
-<section class="tool-hero"><h1>Merge PDF</h1><p>Combine multiple PDF files into one.</p></section><main class="wrap"><div class="card"><div class="drop"><h2>Select PDF files</h2><p>Choose two or more PDFs</p><label class="choose">Choose PDFs<input id="file" type="file" accept="application/pdf" multiple hidden></label></div><div class="controls" id="controls"><button class="btn" id="go">Merge PDFs</button></div><div class="download" id="download"><a id="link">Download Merged PDF</a></div></div></main><section class="content"><h2>Private browser-based tool</h2><p>This tool is designed to process files locally in your browser where supported. Results are provided for general use.</p></section>
+
+<section class="tool-hero"><h1>Merge PDF</h1><p>Combine multiple PDF files into one PDF directly in your browser.</p></section>
+
+<main class="wrap"><div class="card">
+<div class="drop" id="drop"><h2>Drop PDF files here</h2><p>Choose two or more PDF files. You can change their order before merging.</p><label class="choose">Choose PDFs<input id="file" type="file" accept="application/pdf,.pdf" multiple hidden></label></div>
+<div class="controls" id="controls">
+<div class="info" id="count"></div>
+<div class="file-list" id="list"></div>
+<div class="actions"><button class="btn" id="merge" type="button">Merge PDFs</button><button class="btn secondary" id="reset" type="button">Reset</button></div>
+</div>
+<div class="error" id="error"></div>
+<div class="download" id="download"><a id="download-link" href="#" download="tooltomato-merged.pdf">Download Merged PDF</a></div>
+</div></main>
+
 <footer class="site-footer"><div class="footer-grid"><div><h4>🍅 ToolTomato</h4><p style="color:#C9BDB8">Free online tools — calculators, image & PDF utilities.</p></div><div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a></div><div><h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="dmca.html">DMCA Policy</a></div></div><div class="footer-bottom"><span>© 2026 ToolTomato. All rights reserved.</span></div></footer>
-<div id="cookie-banner"><p>We use cookies to improve your experience, and in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div><script src="js/main.js"></script><script>(()=>{let fs=[];const $=x=>document.getElementById(x);$("file").onchange=e=>{fs=[...e.target.files];if(fs.length)$("controls").classList.add("show")};$("go").onclick=async()=>{if(fs.length<2)return;let out=await PDFLib.PDFDocument.create();for(let f of fs){let s=await PDFLib.PDFDocument.load(await f.arrayBuffer()),p=await out.copyPages(s,s.getPageIndices());p.forEach(x=>out.addPage(x))}let u=URL.createObjectURL(new Blob([await out.save()],{type:"application/pdf"}));$("link").href=u;$("link").download="tooltomato-merged.pdf";$("download").classList.add("show")}})()</script></body></html>
+<div id="cookie-banner"><p>We use cookies to improve your experience, and in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div>
+
+<script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let files = [], outputURL = null;
+
+  function showError(msg) {
+    $('error').textContent = msg;
+    $('error').classList.add('show');
+  }
+  function clearError() { $('error').classList.remove('show'); }
+
+  function renderList() {
+    $('list').innerHTML = '';
+    files.forEach((file, i) => {
+      const row = document.createElement('div');
+      row.className = 'file-row';
+      row.innerHTML =
+        '<span class="name">' + (i + 1) + '. ' +
+        file.name.replace(/[<>&"]/g, '') + '</span>' +
+        '<button class="move" type="button" data-up="' + i + '">↑</button>' +
+        '<button class="move" type="button" data-down="' + i + '">↓</button>';
+      $('list').appendChild(row);
+    });
+    $('count').textContent = files.length + ' PDF file' + (files.length === 1 ? '' : 's') + ' selected.';
+    $('controls').classList.toggle('show', files.length > 0);
+  }
+
+  $('list').addEventListener('click', e => {
+    const up = e.target.dataset.up;
+    const down = e.target.dataset.down;
+    if (up !== undefined && +up > 0) {
+      [files[+up - 1], files[+up]] = [files[+up], files[+up - 1]];
+      renderList();
+    }
+    if (down !== undefined && +down < files.length - 1) {
+      [files[+down], files[+down + 1]] = [files[+down + 1], files[+down]];
+      renderList();
+    }
+  });
+
+  function acceptFiles(list) {
+    clearError();
+    const incoming = [...list];
+    const valid = incoming.filter(f => f.type === 'application/pdf' || /\.pdf$/i.test(f.name));
+    if (!valid.length) return showError('Please choose valid PDF files.');
+    if (valid.length !== incoming.length) showError('Only PDF files were added.');
+    files = files.concat(valid);
+    renderList();
+  }
+
+  $('file').addEventListener('change', e => {
+    acceptFiles(e.target.files);
+    e.target.value = '';
+  });
+
+  $('drop').addEventListener('click', e => {
+    if (!e.target.closest('label')) $('file').click();
+  });
+  $('drop').addEventListener('dragover', e => {
+    e.preventDefault();
+    $('drop').classList.add('drag');
+  });
+  $('drop').addEventListener('dragleave', () => $('drop').classList.remove('drag'));
+  $('drop').addEventListener('drop', e => {
+    e.preventDefault();
+    $('drop').classList.remove('drag');
+    acceptFiles(e.dataTransfer.files);
+  });
+
+  $('merge').addEventListener('click', async () => {
+    clearError();
+    $('download').classList.remove('show');
+    if (files.length < 2) return showError('Please choose at least two PDF files.');
+
+    if (!window.PDFLib) return showError('PDF engine could not load. Check your internet connection and try again.');
+
+    try {
+      const merged = await PDFLib.PDFDocument.create();
+
+      for (const file of files) {
+        const source = await PDFLib.PDFDocument.load(await file.arrayBuffer(), {
+          ignoreEncryption: false,
+          throwOnInvalidObject: false
+        });
+        const pages = await merged.copyPages(source, source.getPageIndices());
+        pages.forEach(page => merged.addPage(page));
+      }
+
+      const bytes = await merged.save({ useObjectStreams: true });
+
+      if (outputURL) URL.revokeObjectURL(outputURL);
+      outputURL = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+
+      $('download-link').href = outputURL;
+      $('download').classList.add('show');
+    } catch (err) {
+      console.error(err);
+      showError('Could not merge these PDFs. They may be password-protected, damaged, or unsupported.');
+    }
+  });
+
+  $('reset').addEventListener('click', () => {
+    files = [];
+    clearError();
+    $('controls').classList.remove('show');
+    $('list').innerHTML = '';
+    $('count').textContent = '';
+    $('download').classList.remove('show');
+    if (outputURL) URL.revokeObjectURL(outputURL);
+    outputURL = null;
+  });
+})();
+</script>
+</body>
+</html>

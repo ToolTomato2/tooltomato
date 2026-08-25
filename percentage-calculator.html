@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percentage Calculator — Free Online | ToolTomato</title>
+<meta name="description" content="Free percentage calculator for finding percentages, comparing values, and calculating percentage increase or decrease.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.tool-hero{padding:42px 20px 20px;text-align:center}.tool-hero .eyebrow{display:inline-flex;background:var(--stem-light);color:var(--stem);padding:6px 14px;border-radius:999px;font-size:.8rem;font-weight:700}.tool-hero h1{font-size:clamp(2rem,5vw,3rem);margin:16px 0 8px}.tool-hero p{max-width:650px;margin:auto;color:var(--ink-soft)}
+.calculator-wrap{max-width:820px;margin:auto;padding:20px}.calc-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-card)}
+.mode-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:22px}.mode-tab{border:1px solid var(--line);border-radius:10px;padding:12px 8px;background:#fff;color:var(--ink);font:700 .9rem var(--font-body);cursor:pointer}.mode-tab.active{background:var(--tomato);color:#fff;border-color:var(--tomato)}
+.mode{display:none}.mode.active{display:block}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field label{display:block;font-weight:700;margin-bottom:7px}.field input{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;color:var(--ink)}
+.calc-actions{display:flex;gap:10px;margin-top:20px}.calc-btn,.reset-btn{border-radius:999px;padding:12px 20px;font:700 1rem var(--font-body);cursor:pointer}.calc-btn{border:0;background:var(--tomato);color:#fff}.reset-btn{border:1px solid var(--line);background:#fff;color:var(--ink)}
+.result{display:none;margin-top:22px;background:var(--stem-light);border-left:4px solid var(--stem);padding:18px;border-radius:10px}.result.show{display:block}.result-number{font:800 1.8rem var(--font-display);margin-bottom:4px}.error{display:none;margin-top:14px;background:#FFF3E0;border-left:4px solid var(--gold);padding:12px 15px;border-radius:8px}.error.show{display:block}
+.content-section{max-width:820px;margin:auto;padding:20px}.content-section h2{font-size:1.35rem;margin-top:28px}.content-section p,.content-section li{color:#3A322F;font-size:.95rem}.formula{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px;margin:12px 0;font-family:var(--font-mono)}.faq{border-top:1px solid var(--line);padding:14px 0}.faq h3{font-size:1rem;margin-bottom:5px}
+@media(max-width:650px){.mode-tabs,.form-grid{grid-template-columns:1fr}.calc-card{padding:18px}.calc-actions{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="nav-wrap"><a href="index.html" class="brand"><span class="seal">🍅</span> Tool<span class="tomato-text">Tomato</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><nav class="main-nav"><a href="index.html#calculators">Calculators</a><a href="index.html#image-tools">Image Tools</a><a href="index.html#pdf-tools">PDF Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+
+<section class="tool-hero"><span class="eyebrow">Free · No Sign-up</span><h1>Percentage Calculator</h1><p>Calculate percentages, find what percentage one number is of another, and measure percentage increase or decrease.</p></section>
+
+<main class="calculator-wrap"><div class="calc-card">
+<div class="mode-tabs"><button class="mode-tab active" data-mode="of" type="button">X% of Y</button><button class="mode-tab" data-mode="what" type="button">X is what % of Y?</button><button class="mode-tab" data-mode="change" type="button">Increase / Decrease</button></div>
+
+<section class="mode active" id="mode-of"><div class="form-grid"><div class="field"><label for="percent">Percentage (%)</label><input id="percent" type="number" step="any" placeholder="e.g. 15"></div><div class="field"><label for="number">Number</label><input id="number" type="number" step="any" placeholder="e.g. 200"></div></div></section>
+<section class="mode" id="mode-what"><div class="form-grid"><div class="field"><label for="part">Value (X)</label><input id="part" type="number" step="any" placeholder="e.g. 30"></div><div class="field"><label for="whole">Total (Y)</label><input id="whole" type="number" step="any" placeholder="e.g. 200"></div></div></section>
+<section class="mode" id="mode-change"><div class="form-grid"><div class="field"><label for="old-value">Original value</label><input id="old-value" type="number" step="any" placeholder="e.g. 200"></div><div class="field"><label for="new-value">New value</label><input id="new-value" type="number" step="any" placeholder="e.g. 250"></div></div></section>
+
+<div class="calc-actions"><button class="calc-btn" id="calculate" type="button">Calculate</button><button class="reset-btn" id="reset" type="button">Reset</button></div>
+<div class="error" id="error" role="alert"></div><section class="result" id="result" aria-live="polite"><div class="result-number" id="result-number"></div><div id="result-text"></div></section>
+</div></main>
+
+<section class="content-section"><div class="notice">This calculator provides general mathematical results based on the numbers you enter. Check important financial or business calculations independently before making decisions.</div>
+<h2>How to use the Percentage Calculator</h2><ol><li>Choose the calculation you need.</li><li>Enter the requested numbers.</li><li>Tap <strong>Calculate</strong> to see the result instantly.</li></ol>
+<h2>Percentage formulas</h2><div class="formula">X% of Y = (X ÷ 100) × Y</div><div class="formula">X as a percentage of Y = (X ÷ Y) × 100</div><div class="formula">Percentage change = ((New − Original) ÷ Original) × 100</div>
+<h2>Frequently asked questions</h2><div class="faq"><h3>What is 20% of 500?</h3><p>20% of 500 is 100.</p></div><div class="faq"><h3>How do I calculate percentage increase?</h3><p>Subtract the original value from the new value, divide by the original value, then multiply by 100.</p></div><div class="faq"><h3>Can percentage change be negative?</h3><p>Yes. A negative percentage change means the new value is lower than the original value.</p></div>
+</section>
+
+<footer class="site-footer"><div class="footer-grid"><div><h4>🍅 ToolTomato</h4><p style="color:#C9BDB8;font-size:0.85rem;max-width:320px;">Free online tools — calculators, image & PDF utilities. No sign-up, no cost, runs right in your browser.</p></div><div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a><a href="affiliate-disclosure.html">Affiliate Disclosure</a></div><div><h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="dmca.html">DMCA Policy</a></div></div><div class="footer-bottom"><span>© 2026 ToolTomato. All rights reserved.</span><span>Made with 🍅 for quick everyday calculations.</span></div></footer>
+<div id="cookie-banner"><p>We use cookies to improve your experience and, in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div>
+<script src="js/main.js"></script>
+<script>
+(()=>{let mode='of';const tabs=document.querySelectorAll('.mode-tab'),res=document.getElementById('result'),err=document.getElementById('error');const n=id=>Number(document.getElementById(id).value);const f=x=>new Intl.NumberFormat(undefined,{maximumFractionDigits:2}).format(x);function error(m){res.classList.remove('show');err.textContent=m;err.classList.add('show')}function result(num,text){err.classList.remove('show');document.getElementById('result-number').textContent=num;document.getElementById('result-text').textContent=text;res.classList.add('show')}tabs.forEach(t=>t.onclick=()=>{mode=t.dataset.mode;tabs.forEach(x=>x.classList.toggle('active',x===t));document.querySelectorAll('.mode').forEach(x=>x.classList.remove('active'));document.getElementById('mode-'+mode).classList.add('active');res.classList.remove('show');err.classList.remove('show')});document.getElementById('calculate').onclick=()=>{if(mode==='of'){let p=n('percent'),x=n('number');if(!Number.isFinite(p)||!Number.isFinite(x))return error('Please enter both numbers.');let a=p*x/100;return result(f(a),f(p)+'% of '+f(x)+' is '+f(a)+'.')}if(mode==='what'){let x=n('part'),y=n('whole');if(!Number.isFinite(x)||!Number.isFinite(y))return error('Please enter both numbers.');if(y===0)return error('The total value cannot be zero.');let a=x/y*100;return result(f(a)+'%',f(x)+' is '+f(a)+'% of '+f(y)+'.')}let o=n('old-value'),v=n('new-value');if(!Number.isFinite(o)||!Number.isFinite(v))return error('Please enter both values.');if(o===0)return error('The original value cannot be zero for percentage change.');let c=(v-o)/o*100,d=c>0?'increase':c<0?'decrease':'no change';result(f(Math.abs(c))+'% '+d,'The value changed from '+f(o)+' to '+f(v)+'.')};document.getElementById('reset').onclick=()=>{document.querySelectorAll('input').forEach(x=>x.value='');res.classList.remove('show');err.classList.remove('show')};})();
+</script>
+</body>
+</html>

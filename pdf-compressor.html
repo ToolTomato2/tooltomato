@@ -50,7 +50,7 @@
 
 <section class="content">
 <h2>How it works</h2>
-<p>Each page is rendered in your browser and rebuilt as a JPEG at a level-specific resolution and quality. Moderate and Strong intentionally reduce page resolution and JPEG quality much more aggressively. This gives Basic, Moderate and Strong modes a real compression difference instead of only changing PDF metadata.</p>
+<p>Each page is rendered in your browser and rebuilt as a JPEG at a level-specific resolution and quality. Moderate and Strong intentionally reduce page resolution and JPEG quality much more aggressively. Strong is designed for maximum size reduction and may noticeably reduce image/text sharpness. This gives Basic, Moderate and Strong modes a real compression difference instead of only changing PDF metadata.</p>
 <h2>Privacy</h2>
 <p>Your selected PDF is processed locally in your browser. It is not intentionally uploaded to a ToolTomato server.</p>
 </section>
@@ -70,9 +70,9 @@ const $ = id => document.getElementById(id);
 let file = null, outputURL = null, level = "basic";
 
 const settings = {
-  basic:    { scale: 1.00, quality: 0.72 },
-  moderate: { scale: 0.72, quality: 0.48 },
-  strong:   { scale: 0.50, quality: 0.28 }
+  basic:    { scale: 0.90, quality: 0.62 },
+  moderate: { scale: 0.58, quality: 0.36 },
+  strong:   { scale: 0.38, quality: 0.16 }
 };
 
 function formatSize(bytes) {
@@ -94,7 +94,7 @@ function updateEstimate() {
   if (!file) return;
   const s = settings[level];
   // Planning estimate only; actual size is shown after compression.
-  const factor = level === "basic" ? 0.68 : level === "moderate" ? 0.45 : 0.28;
+  const factor = level === "basic" ? 0.58 : level === "moderate" ? 0.34 : 0.18;
   const estimate = Math.max(1024, file.size * factor);
   $("estimate").textContent = "≈ " + formatSize(estimate);
 }

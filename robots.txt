@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tooltomato2.github.io/tooltomato/sitemap.xml

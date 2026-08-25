@@ -196,4 +196,22 @@ footer.site-footer{
   nav.main-nav.open{display:flex;}
   .nav-toggle{display:block;}
   .footer-grid{grid-template-columns:1fr; gap:20px;}
+}/* ToolTomato mobile menu fix */
+@media (max-width: 768px) {
+  .main-nav {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 12px 0 18px !important;
+    margin: 0 !important;
+  }
+
+  .main-nav a {
+    display: block !important;
+    padding: 9px 0 !important;
+    margin: 0 !important;
+  }
+
+  .site-header {
+    height: auto !important;
+  }
 }

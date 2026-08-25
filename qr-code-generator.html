@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>QR Code Generator | ToolTomato</title>
+<meta name="description" content="Create downloadable QR codes for links and text directly in your browser.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.tool-hero{padding:42px 20px 20px;text-align:center}.tool-hero h1{font-size:clamp(2rem,5vw,3rem)}.tool-hero p{max-width:720px;margin:auto;color:var(--ink-soft)}
+.wrap{max-width:850px;margin:auto;padding:20px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-card)}
+textarea,input,select{width:100%;box-sizing:border-box;padding:13px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;color:var(--ink)}
+label{display:block;font-weight:700;margin-bottom:7px}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:999px;padding:12px 20px;background:var(--tomato);color:#fff;font:700 1rem var(--font-body);cursor:pointer}.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.stat{background:var(--stem-light);border-radius:12px;padding:14px}.stat strong{display:block;font-size:1.2rem}.stat span{font-size:.8rem;color:var(--ink-soft)}
+.result{margin-top:18px;padding:15px;background:#fff;border:1px solid var(--line);border-radius:12px}.qr-wrap{margin-top:20px;text-align:center}.qr-wrap canvas{max-width:100%;height:auto;border:12px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.08);border-radius:8px}.download{display:none;margin-top:15px}.download.show{display:block}.download a{display:inline-block;background:var(--tomato);color:#fff;border-radius:999px;padding:12px 22px;font-weight:700;text-decoration:none}.hint{font-size:.85rem;color:var(--ink-soft);margin-top:8px}.content{max-width:850px;margin:auto;padding:20px}.content h2{margin-top:28px}
+@media(max-width:650px){.card{padding:18px}.stats{grid-template-columns:1fr 1fr}.actions{flex-direction:column}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="nav-wrap"><a href="index.html" class="brand"><span class="seal">🍅</span> Tool<span class="tomato-text">Tomato</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><nav class="main-nav"><a href="index.html#calculators">Calculators</a><a href="index.html#image-tools">Image Tools</a><a href="index.html#pdf-tools">PDF Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+<section class="tool-hero"><h1>QR Code Generator</h1><p>Create downloadable QR codes for links and text directly in your browser.</p></section>
+<main class="wrap"><div class="card">
+<label for="qr-text">Text or URL</label>
+<textarea id="qr-text" rows="5" placeholder="https://example.com or any text..."></textarea>
+<div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+<div><label for="size">QR size</label><select id="size"><option value="180">180 × 180</option><option value="256" selected>256 × 256</option><option value="384">384 × 384</option><option value="512">512 × 512</option></select></div>
+<div><label for="level">Error correction</label><select id="level"><option value="L">Low</option><option value="M" selected>Medium</option><option value="Q">Quartile</option><option value="H">High</option></select></div>
+</div>
+<div class="actions"><button class="btn" id="generate" type="button">Generate QR Code</button><button class="btn secondary" id="clear" type="button">Clear</button></div>
+<div class="qr-wrap" id="qr-wrap"><canvas id="qr" width="256" height="256"></canvas></div>
+<div class="download" id="download"><a id="download-link" href="#" download="tooltomato-qr.png">Download QR PNG</a></div>
+<p class="hint">Tip: URLs, UPI links, contact details and plain text can all be encoded.</p>
+</div></main>
+<section class="content"><h2>Private browser-based tool</h2><p>ToolTomato is designed for quick everyday tasks. Where supported, processing happens directly in your browser and no account is required.</p></section>
+<footer class="site-footer"><div class="footer-grid"><div><h4>🍅 ToolTomato</h4><p style="color:#C9BDB8">Free online tools — calculators, image & PDF utilities.</p></div><div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a></div><div><h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="dmca.html">DMCA Policy</a></div></div><div class="footer-bottom"><span>© 2026 ToolTomato. All rights reserved.</span></div></footer>
+<div id="cookie-banner"><p>We use cookies to improve your experience, and in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div>
+<script src="js/main.js"></script><script>
+(() => {
+  const input = document.getElementById('qr-text');
+  const size = document.getElementById('size');
+  const level = document.getElementById('level');
+  const canvas = document.getElementById('qr');
+  const wrap = document.getElementById('qr-wrap');
+  const download = document.getElementById('download');
+  const link = document.getElementById('download-link');
+
+  function generate() {
+    const value = input.value.trim();
+    if (!value) { wrap.style.display='none'; download.classList.remove('show'); return; }
+    if (!window.QRCode) return;
+    const n = Number(size.value);
+    canvas.width = n; canvas.height = n;
+    QRCode.toCanvas(canvas, value, {
+      width: n,
+      margin: 2,
+      errorCorrectionLevel: level.value,
+      color: { dark: '#000000', light: '#ffffff' }
+    }, err => {
+      if (err) { console.error(err); return; }
+      wrap.style.display='block';
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'tooltomato-qr.png';
+      download.classList.add('show');
+    });
+  }
+  document.getElementById('generate').addEventListener('click', generate);
+  [size, level].forEach(x => x.addEventListener('change', () => { if(input.value.trim()) generate(); }));
+  input.addEventListener('input', () => { if(!input.value.trim()){wrap.style.display='none';download.classList.remove('show');} });
+  document.getElementById('clear').addEventListener('click', () => { input.value='';wrap.style.display='none';download.classList.remove('show');input.focus(); });
+  wrap.style.display='none';
+})();
+</script></body></html>

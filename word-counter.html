@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Word Counter | ToolTomato</title>
+<meta name="description" content="Count words, characters, sentences and estimated reading time instantly in your browser.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.tool-hero{padding:42px 20px 20px;text-align:center}.tool-hero h1{font-size:clamp(2rem,5vw,3rem)}.tool-hero p{max-width:720px;margin:auto;color:var(--ink-soft)}
+.wrap{max-width:850px;margin:auto;padding:20px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-card)}
+textarea,input,select{width:100%;box-sizing:border-box;padding:13px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;color:var(--ink)}
+label{display:block;font-weight:700;margin-bottom:7px}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:999px;padding:12px 20px;background:var(--tomato);color:#fff;font:700 1rem var(--font-body);cursor:pointer}.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.stat{background:var(--stem-light);border-radius:12px;padding:14px}.stat strong{display:block;font-size:1.2rem}.stat span{font-size:.8rem;color:var(--ink-soft)}
+.result{margin-top:18px;padding:15px;background:#fff;border:1px solid var(--line);border-radius:12px}.qr-wrap{margin-top:20px;text-align:center}.qr-wrap canvas{max-width:100%;height:auto;border:12px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.08);border-radius:8px}.download{display:none;margin-top:15px}.download.show{display:block}.download a{display:inline-block;background:var(--tomato);color:#fff;border-radius:999px;padding:12px 22px;font-weight:700;text-decoration:none}.hint{font-size:.85rem;color:var(--ink-soft);margin-top:8px}.content{max-width:850px;margin:auto;padding:20px}.content h2{margin-top:28px}
+@media(max-width:650px){.card{padding:18px}.stats{grid-template-columns:1fr 1fr}.actions{flex-direction:column}}
+</style>
+
+</head>
+<body>
+<header class="site-header"><div class="nav-wrap"><a href="index.html" class="brand"><span class="seal">🍅</span> Tool<span class="tomato-text">Tomato</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><nav class="main-nav"><a href="index.html#calculators">Calculators</a><a href="index.html#image-tools">Image Tools</a><a href="index.html#pdf-tools">PDF Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+<section class="tool-hero"><h1>Word Counter</h1><p>Count words, characters, sentences and estimated reading time instantly in your browser.</p></section>
+<main class="wrap"><div class="card">
+<label for="text">Enter or paste your text</label>
+<textarea id="text" rows="12" placeholder="Start typing or paste text here..."></textarea>
+<div class="stats">
+<div class="stat"><strong id="words">0</strong><span>Words</span></div>
+<div class="stat"><strong id="chars">0</strong><span>Characters</span></div>
+<div class="stat"><strong id="charsNo">0</strong><span>Characters (no spaces)</span></div>
+<div class="stat"><strong id="sentences">0</strong><span>Sentences</span></div>
+</div>
+<div class="result">
+<strong>Reading time:</strong> <span id="reading">0 min</span><br>
+<span class="hint">Based on an average reading speed of about 200 words per minute.</span>
+</div>
+<div class="actions"><button class="btn secondary" id="clear" type="button">Clear Text</button></div>
+</div></main>
+<section class="content"><h2>Private browser-based tool</h2><p>ToolTomato is designed for quick everyday tasks. Where supported, processing happens directly in your browser and no account is required.</p></section>
+<footer class="site-footer"><div class="footer-grid"><div><h4>🍅 ToolTomato</h4><p style="color:#C9BDB8">Free online tools — calculators, image & PDF utilities.</p></div><div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a></div><div><h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="dmca.html">DMCA Policy</a></div></div><div class="footer-bottom"><span>© 2026 ToolTomato. All rights reserved.</span></div></footer>
+<div id="cookie-banner"><p>We use cookies to improve your experience, and in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div>
+<script src="js/main.js"></script><script>
+(() => {
+  const text = document.getElementById('text');
+  const words = document.getElementById('words');
+  const chars = document.getElementById('chars');
+  const charsNo = document.getElementById('charsNo');
+  const sentences = document.getElementById('sentences');
+  const reading = document.getElementById('reading');
+
+  function update() {
+    const value = text.value;
+    const list = value.trim() ? value.trim().split(/\s+/) : [];
+    const sentenceList = value.match(/[.!?]+(?=\s|$)/g) || [];
+    words.textContent = list.length.toLocaleString();
+    chars.textContent = value.length.toLocaleString();
+    charsNo.textContent = value.replace(/\s/g, '').length.toLocaleString();
+    sentences.textContent = sentenceList.length.toLocaleString();
+    const mins = list.length / 200;
+    reading.textContent = list.length ? (mins < 1 ? '< 1 min' : Math.ceil(mins) + ' min') : '0 min';
+  }
+  text.addEventListener('input', update);
+  document.getElementById('clear').addEventListener('click', () => { text.value=''; update(); text.focus(); });
+  update();
+})();
+</script></body></html>

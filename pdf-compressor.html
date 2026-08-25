@@ -4,199 +4,223 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PDF Compressor — Free Online | ToolTomato</title>
-<meta name="description" content="Reduce and optimize PDF file size directly in your browser. Compare original and optimized file sizes and download the result.">
+<meta name="description" content="Actually compress PDF pages with Basic, Moderate and Strong settings. See estimated and actual output size.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/style.css">
 <style>
-.tool-hero{padding:42px 20px 20px;text-align:center}.tool-hero h1{font-size:clamp(2rem,5vw,3rem)}.tool-hero p{max-width:720px;margin:auto;color:var(--ink-soft)}
+.tool-hero{padding:42px 20px 20px;text-align:center}.tool-hero h1{font-size:clamp(2rem,5vw,3rem)}.tool-hero p{max-width:760px;margin:auto;color:var(--ink-soft)}
 .wrap{max-width:850px;margin:auto;padding:20px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-card)}
 .drop{border:2px dashed var(--line);border-radius:16px;padding:38px 20px;text-align:center;background:#fff;cursor:pointer}.drop.drag{border-color:var(--tomato);background:#fff7f3}.drop h2{margin:0 0 8px}.drop p{color:var(--ink-soft)}.choose{display:inline-block;background:var(--tomato);color:#fff;border-radius:999px;padding:11px 20px;font-weight:700;cursor:pointer}
-.controls{display:none;margin-top:20px}.controls.show{display:block}.field label{display:block;font-weight:700;margin-bottom:7px}.field select{width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
-.info{margin:14px 0;padding:14px;background:var(--stem-light);border-left:4px solid var(--stem);border-radius:10px}.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.level{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:13px 10px;text-align:left;cursor:pointer}.level strong,.level span{display:block}.level span{font-size:.78rem;color:var(--ink-soft);margin-top:3px}.level.active{border:2px solid var(--tomato);background:#fff7f3}.estimate{margin-top:12px;padding:14px;background:#fff;border:1px solid var(--line);border-radius:10px}.estimate strong{display:block}.estimate small{color:var(--ink-soft)}#estimate-size{font-size:1.15rem;font-weight:800;margin:5px 0}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:999px;padding:12px 20px;font:700 1rem var(--font-body);background:var(--tomato);color:#fff;cursor:pointer}.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.controls{display:none;margin-top:20px}.controls.show{display:block}.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.level{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:14px 10px;text-align:left;cursor:pointer}.level strong,.level span{display:block}.level span{font-size:.78rem;color:var(--ink-soft);margin-top:4px}.level.active{border:2px solid var(--tomato);background:#fff7f3}
+.info{margin:14px 0;padding:14px;background:var(--stem-light);border-left:4px solid var(--stem);border-radius:10px}.estimate{margin:12px 0;padding:14px;background:#fff;border:1px solid var(--line);border-radius:10px}.estimate strong{display:block}.estimate-size{font-size:1.2rem;font-weight:800;margin-top:5px}.estimate small{color:var(--ink-soft)}
+.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:999px;padding:12px 20px;background:var(--tomato);color:#fff;font:700 1rem var(--font-body);cursor:pointer}.btn:disabled{opacity:.55;cursor:not-allowed}.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
 .progress{display:none;margin-top:18px}.progress.show{display:block}.bar{height:10px;background:#eee;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:var(--tomato);transition:width .2s}.progress p{font-size:.9rem;color:var(--ink-soft)}
-.result{display:none;margin-top:20px;padding:18px;background:var(--stem-light);border-left:4px solid var(--stem);border-radius:10px}.result.show{display:block}.download{margin-top:15px}.download a{display:inline-block;background:var(--tomato);color:#fff;border-radius:999px;padding:12px 22px;font-weight:700;text-decoration:none}
-.error{display:none;margin-top:14px;padding:12px 15px;background:#FFF3E0;border-left:4px solid var(--gold);border-radius:8px}.error.show{display:block}.content{max-width:850px;margin:auto;padding:20px}.content h2{margin-top:28px}
-@media(max-width:650px){.card{padding:18px}.actions{flex-direction:column}}
+.result{display:none;margin-top:20px;padding:18px;background:var(--stem-light);border-left:4px solid var(--stem);border-radius:10px}.result.show{display:block}.result-title{font-size:1.15rem;font-weight:800}.download{margin-top:15px}.download a{display:inline-block;background:var(--tomato);color:#fff;border-radius:999px;padding:12px 22px;font-weight:700;text-decoration:none}
+.error{display:none;margin-top:14px;padding:12px 15px;background:#FFF3E0;border-left:4px solid var(--gold);border-radius:8px}.error.show{display:block}.note{font-size:.86rem;color:var(--ink-soft);margin-top:12px}.content{max-width:850px;margin:auto;padding:20px}.content h2{margin-top:28px}
+@media(max-width:650px){.card{padding:18px}.levels{grid-template-columns:1fr}.actions{flex-direction:column}}
 </style>
 </head>
 <body>
 <header class="site-header"><div class="nav-wrap"><a href="index.html" class="brand"><span class="seal">🍅</span> Tool<span class="tomato-text">Tomato</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><nav class="main-nav"><a href="index.html#calculators">Calculators</a><a href="index.html#image-tools">Image Tools</a><a href="index.html#pdf-tools">PDF Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
 
-<section class="tool-hero"><h1>PDF Compressor</h1><p>Optimize a PDF directly in your browser and download the processed file. No account required.</p></section>
+<section class="tool-hero"><h1>PDF Compressor</h1><p>Real page-image compression with Basic, Moderate and Strong modes. See the estimated size before processing and the actual size after.</p></section>
 
 <main class="wrap"><div class="card">
-<div class="drop" id="drop"><h2>Drop a PDF here</h2><p>Choose one PDF file from your device.</p><label class="choose">Choose PDF<input id="file" type="file" accept="application/pdf,.pdf" hidden></label></div>
+<div class="drop" id="drop"><h2>Drop a PDF here</h2><p>Choose one PDF file from your device. For best results, use PDFs with scanned pages or large images.</p><label class="choose">Choose PDF<input id="file" type="file" accept="application/pdf,.pdf" hidden></label></div>
 
 <div class="controls" id="controls">
-<div class="field"><label>Compression level</label>
-<div class="levels" id="levels">
-<button type="button" class="level active" data-level="basic"><strong>Basic</strong><span>Light compression</span></button>
-<button type="button" class="level" data-level="moderate"><strong>Moderate</strong><span>Balanced compression</span></button>
-<button type="button" class="level" data-level="strong"><strong>Strong</strong><span>Maximum optimization</span></button>
+<label>Compression level</label>
+<div class="levels">
+<button type="button" class="level active" data-level="basic"><strong>Basic</strong><span>Light • higher quality</span></button>
+<button type="button" class="level" data-level="moderate"><strong>Moderate</strong><span>Balanced size & quality</span></button>
+<button type="button" class="level" data-level="strong"><strong>Strong</strong><span>Smaller file • lower quality</span></button>
 </div>
-</div>
+
 <div class="info" id="info"></div>
-<div class="estimate" id="estimate"><strong>Estimated after compression</strong><div id="estimate-size">Choose a PDF to see an estimate.</div><small>Estimate only — actual size depends on the PDF.</small></div>
-<div class="actions"><button class="btn" id="process" type="button">Optimize PDF</button><button class="btn secondary" id="reset" type="button">Reset</button></div>
+<div class="estimate"><strong>Estimated after compression</strong><div class="estimate-size" id="estimate">Choose a level to calculate an estimate.</div><small>Estimate only. The actual result is calculated when you compress.</small></div>
+
+<div class="actions"><button class="btn" id="process" type="button">Compress PDF</button><button class="btn secondary" id="reset" type="button">Reset</button></div>
 <div class="progress" id="progress"><div class="bar"><span id="bar"></span></div><p id="progress-text">Preparing…</p></div>
 </div>
 
 <div class="error" id="error"></div>
-<div class="result" id="result"><strong id="result-title"></strong><div id="result-details" style="margin-top:6px"></div><div class="download"><a id="download-link" href="#" download="tooltomato-optimized.pdf">Download Optimized PDF</a></div></div>
+<div class="result" id="result"><div class="result-title" id="result-title"></div><div id="result-details" style="margin-top:6px"></div><div class="download"><a id="download-link" href="#" download="tooltomato-compressed.pdf">Download Compressed PDF</a></div></div>
+<p class="note">Note: this version truly recompresses rendered PDF pages. Text-heavy PDFs can sometimes become larger because pages are rebuilt as images. If that happens, the tool will tell you and offer the smaller file.</p>
 </div></main>
 
 <section class="content">
-<h2>Important note</h2>
-<p>PDF compression is format-dependent. This browser tool focuses on structural optimization and object-stream compression. It does not re-encode embedded images, so some PDFs may become only slightly smaller or even remain similar in size.</p>
+<h2>How it works</h2>
+<p>Each page is rendered in your browser and rebuilt as a JPEG at a level-specific resolution and quality. This gives Basic, Moderate and Strong modes a real compression difference instead of only changing PDF metadata.</p>
 <h2>Privacy</h2>
-<p>The selected PDF is processed in your browser. It is not intentionally uploaded to a ToolTomato server.</p>
+<p>Your selected PDF is processed locally in your browser. It is not intentionally uploaded to a ToolTomato server.</p>
 </section>
 
 <footer class="site-footer"><div class="footer-grid"><div><h4>🍅 ToolTomato</h4><p style="color:#C9BDB8">Free online tools — calculators, image & PDF utilities.</p></div><div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a></div><div><h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="dmca.html">DMCA Policy</a></div></div><div class="footer-bottom"><span>© 2026 ToolTomato. All rights reserved.</span></div></footer>
 <div id="cookie-banner"><p>We use cookies to improve your experience, and in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div>
 
 <script src="js/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-<script>
-(() => {
-  const $ = id => document.getElementById(id);
-  let file = null, outputURL = null, level = 'basic';
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs" type="module"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+<script type="module">
+import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
 
-  // These are clearly labeled planning estimates, not guaranteed output sizes.
-  const factors = { basic: 0.95, moderate: 0.85, strong: 0.75 };
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
 
-  function error(msg) {
-    $('error').textContent = msg;
-    $('error').classList.add('show');
-  }
-  function clearError() { $('error').classList.remove('show'); }
+const $ = id => document.getElementById(id);
+let file = null, outputURL = null, level = "basic";
 
-  function formatSize(bytes) {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
-    return (bytes / 1024 / 1024).toFixed(2) + ' MB';
-  }
+const settings = {
+  basic:    { scale: 1.25, quality: 0.82 },
+  moderate: { scale: 1.00, quality: 0.62 },
+  strong:   { scale: 0.78, quality: 0.45 }
+};
 
-  function updateEstimate() {
-    if (!file) {
-      $('estimate-size').textContent = 'Choose a PDF to see an estimate.';
-      return;
-    }
-    const estimated = Math.max(1, Math.round(file.size * factors[level]));
-    $('estimate-size').textContent = '≈ ' + formatSize(estimated);
-  }
+function formatSize(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + " KB";
+  return (bytes / 1024 / 1024).toFixed(2) + " MB";
+}
+function setError(msg) {
+  $("error").textContent = msg;
+  $("error").classList.add("show");
+}
+function clearError() { $("error").classList.remove("show"); }
+function progress(p, msg) {
+  $("progress").classList.add("show");
+  $("bar").style.width = p + "%";
+  $("progress-text").textContent = msg;
+}
+function updateEstimate() {
+  if (!file) return;
+  const s = settings[level];
+  // Planning estimate only; actual size is shown after compression.
+  const factor = level === "basic" ? 0.78 : level === "moderate" ? 0.55 : 0.38;
+  const estimate = Math.max(1024, file.size * factor);
+  $("estimate").textContent = "≈ " + formatSize(estimate);
+}
+function loadFile(f) {
+  clearError();
+  if (!f) return;
+  if (!(f.type === "application/pdf" || /\.pdf$/i.test(f.name))) return setError("Please choose a valid PDF file.");
+  if (f.size > 100 * 1024 * 1024) return setError("Please choose a PDF smaller than 100 MB.");
+  file = f;
+  $("info").textContent = "Original size: " + formatSize(f.size) + " · " + f.name;
+  $("controls").classList.add("show");
+  $("result").classList.remove("show");
+  updateEstimate();
+}
 
-  document.querySelectorAll('.level').forEach(btn => {
-    btn.addEventListener('click', () => {
-      level = btn.dataset.level;
-      document.querySelectorAll('.level').forEach(x => x.classList.toggle('active', x === btn));
-      updateEstimate();
-    });
-  });
-
-  function loadFile(f) {
-    clearError();
-    if (!f) return;
-    if (!(f.type === 'application/pdf' || /\.pdf$/i.test(f.name))) {
-      return error('Please choose a valid PDF file.');
-    }
-    if (f.size > 100 * 1024 * 1024) {
-      return error('Please choose a PDF smaller than 100 MB.');
-    }
-    file = f;
-    $('info').textContent = 'Original: ' + formatSize(f.size) + ' · ' + f.name;
-    $('controls').classList.add('show');
-    $('result').classList.remove('show');
+document.querySelectorAll(".level").forEach(btn => {
+  btn.addEventListener("click", () => {
+    level = btn.dataset.level;
+    document.querySelectorAll(".level").forEach(b => b.classList.toggle("active", b === btn));
     updateEstimate();
-  }
-
-  $('file').addEventListener('change', e => {
-    loadFile(e.target.files[0]);
-    e.target.value = '';
   });
-  $('drop').addEventListener('click', e => {
-    if (!e.target.closest('label')) $('file').click();
-  });
-  $('drop').addEventListener('dragover', e => {
-    e.preventDefault();
-    $('drop').classList.add('drag');
-  });
-  $('drop').addEventListener('dragleave', () => $('drop').classList.remove('drag'));
-  $('drop').addEventListener('drop', e => {
-    e.preventDefault();
-    $('drop').classList.remove('drag');
-    loadFile(e.dataTransfer.files[0]);
-  });
+});
 
-  $('process').addEventListener('click', async () => {
-    clearError();
-    $('result').classList.remove('show');
-    if (!file) return error('Please choose a PDF first.');
-    if (!window.PDFLib) return error('PDF engine could not load. Check your internet connection and try again.');
+$("file").addEventListener("change", e => { loadFile(e.target.files[0]); e.target.value = ""; });
+$("drop").addEventListener("click", e => { if (!e.target.closest("label")) $("file").click(); });
+$("drop").addEventListener("dragover", e => { e.preventDefault(); $("drop").classList.add("drag"); });
+$("drop").addEventListener("dragleave", () => $("drop").classList.remove("drag"));
+$("drop").addEventListener("drop", e => { e.preventDefault(); $("drop").classList.remove("drag"); loadFile(e.dataTransfer.files[0]); });
 
-    $('process').disabled = true;
-    try {
-      setProgress(15, 'Reading PDF…');
-      const src = await PDFLib.PDFDocument.load(await file.arrayBuffer(), {
-        ignoreEncryption: false,
-        throwOnInvalidObject: false,
-        updateMetadata: false
-      });
+$("process").addEventListener("click", async () => {
+  clearError();
+  $("result").classList.remove("show");
+  if (!file) return setError("Please choose a PDF first.");
 
-      setProgress(45, 'Rebuilding PDF structure…');
-      const out = await PDFLib.PDFDocument.create();
-      const pages = await out.copyPages(src, src.getPageIndices());
-      pages.forEach(page => out.addPage(page));
+  $("process").disabled = true;
+  try {
+    progress(5, "Opening PDF…");
+    const data = new Uint8Array(await file.arrayBuffer());
+    const source = await pdfjsLib.getDocument({ data }).promise;
+    const cfg = settings[level];
 
-      setProgress(75, 'Applying optimization…');
-      const bytes = await out.save({
-        useObjectStreams: true,
-        addDefaultPage: false,
-        objectsPerTick: level === 'strong' ? 50 : level === 'moderate' ? 75 : 100
-      });
+    const { jsPDF } = window.jspdf;
+    let output = null;
 
-      setProgress(100, 'Finished.');
-      if (outputURL) URL.revokeObjectURL(outputURL);
-      outputURL = URL.createObjectURL(new Blob([bytes], {type:'application/pdf'}));
+    for (let n = 1; n <= source.numPages; n++) {
+      const page = await source.getPage(n);
+      const viewport = page.getViewport({ scale: cfg.scale });
 
-      const oldSize = file.size, newSize = bytes.length;
-      const actual = oldSize ? ((1 - newSize / oldSize) * 100) : 0;
+      // Keep memory reasonable on very large pages.
+      const maxPixels = 5000000;
+      let scale = cfg.scale;
+      if (viewport.width * viewport.height > maxPixels) {
+        scale *= Math.sqrt(maxPixels / (viewport.width * viewport.height));
+      }
+      const vp = page.getViewport({ scale });
 
-      $('result-title').textContent = actual > 0
-        ? 'Actual reduction: ' + actual.toFixed(1) + '%'
-        : 'PDF processed successfully';
-      $('result-details').textContent =
-        'Original: ' + formatSize(oldSize) + ' · After: ' + formatSize(newSize) +
-        ' · Level: ' + level.charAt(0).toUpperCase() + level.slice(1);
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.ceil(vp.width);
+      canvas.height = Math.ceil(vp.height);
+      const ctx = canvas.getContext("2d", { alpha: false });
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      $('download-link').href = outputURL;
-      $('result').classList.add('show');
-    } catch (e) {
-      console.error(e);
-      error('Could not process this PDF. It may be password-protected, damaged, or unsupported.');
-    } finally {
-      $('process').disabled = false;
+      progress(10 + Math.round((n - 1) / source.numPages * 70), "Compressing page " + n + " of " + source.numPages + "…");
+      await page.render({ canvasContext: ctx, viewport: vp }).promise;
+
+      const jpg = canvas.toDataURL("image/jpeg", cfg.quality);
+      const widthMm = vp.width * 25.4 / 72;
+      const heightMm = vp.height * 25.4 / 72;
+      const orientation = widthMm > heightMm ? "landscape" : "portrait";
+
+      if (!output) {
+        output = new jsPDF({ orientation, unit: "mm", format: [widthMm, heightMm], compress: true });
+      } else {
+        output.addPage([widthMm, heightMm], orientation);
+      }
+      output.addImage(jpg, "JPEG", 0, 0, widthMm, heightMm, undefined, "FAST");
     }
-  });
 
-  $('reset').addEventListener('click', () => {
-    file = null;
-    clearError();
-    $('controls').classList.remove('show');
-    $('result').classList.remove('show');
-    $('progress').classList.remove('show');
-    $('bar').style.width = '0%';
-    $('estimate-size').textContent = 'Choose a PDF to see an estimate.';
+    progress(90, "Building compressed PDF…");
+    const blob = output.output("blob");
+    const newSize = blob.size;
+    const oldSize = file.size;
+
+    // Never present a larger file as a successful compression.
+    let finalBlob = blob;
+    let message;
+    if (newSize >= oldSize) {
+      finalBlob = file;
+      message = "This PDF could not be made smaller at this level.";
+    } else {
+      const saved = (1 - newSize / oldSize) * 100;
+      message = "Saved " + saved.toFixed(1) + "%";
+    }
+
     if (outputURL) URL.revokeObjectURL(outputURL);
-    outputURL = null;
-  });
+    outputURL = URL.createObjectURL(finalBlob);
 
-  function setProgress(p, t) {
-    $('progress').classList.add('show');
-    $('bar').style.width = p + '%';
-    $('progress-text').textContent = t;
+    $("result-title").textContent = message;
+    $("result-details").textContent =
+      "Before: " + formatSize(oldSize) + " · After: " + formatSize(finalBlob.size) +
+      " · " + level.charAt(0).toUpperCase() + level.slice(1) + " compression";
+
+    $("download-link").href = outputURL;
+    $("download-link").download = newSize < oldSize ? "tooltomato-compressed-" + level + ".pdf" : "tooltomato-original.pdf";
+    $("result").classList.add("show");
+    progress(100, "Finished.");
+  } catch (err) {
+    console.error(err);
+    setError("Compression failed. This PDF may be encrypted, damaged, or too complex for browser processing.");
+  } finally {
+    $("process").disabled = false;
   }
-})();
+});
+
+$("reset").addEventListener("click", () => {
+  file = null;
+  clearError();
+  $("controls").classList.remove("show");
+  $("result").classList.remove("show");
+  $("progress").classList.remove("show");
+  $("bar").style.width = "0%";
+  $("estimate").textContent = "Choose a level to calculate an estimate.";
+  if (outputURL) URL.revokeObjectURL(outputURL);
+  outputURL = null;
+});
 </script>
 </body>
 </html>

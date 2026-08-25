@@ -4,112 +4,250 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Image Resizer — Free Online | ToolTomato</title>
-<meta name="description" content="Resize JPG, PNG and WebP images to exact pixel dimensions directly in your browser. Maintain aspect ratio or set custom width and height.">
-<link rel="canonical" href="https://tooltomato2.github.io/tooltomato/image-resizer.html">
+<meta name="description" content="Resize images by file size, dimensions, width, height or longest side. Convert JPG, PNG and WebP with a premium mobile-friendly interface.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="Image Resizer — ToolTomato">
-<meta property="og:description" content="Resize images to exact dimensions privately in your browser.">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
-.tool-hero{padding:42px 20px 20px;text-align:center}.tool-hero .eyebrow{display:inline-flex;background:var(--stem-light);color:var(--stem);padding:6px 14px;border-radius:999px;font-size:.8rem;font-weight:700;text-transform:uppercase}.tool-hero h1{font-size:clamp(2rem,5vw,3rem);margin:16px 0 8px}.tool-hero p{max-width:720px;margin:auto;color:var(--ink-soft)}
-.tool-wrap{max-width:850px;margin:auto;padding:20px}.tool-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-card)}
-.drop-zone{border:2px dashed var(--line);border-radius:16px;padding:38px 20px;text-align:center;background:#fff;cursor:pointer}.drop-zone.drag{border-color:var(--tomato);background:#fff7f3}.drop-zone h2{margin:0 0 6px;font-size:1.25rem}.drop-zone p{margin:5px 0;color:var(--ink-soft)}.choose{display:inline-block;margin-top:12px;background:var(--tomato);color:#fff;border-radius:999px;padding:11px 20px;font-weight:700}
-.controls{display:none;margin-top:22px}.controls.show{display:block}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field label{display:block;font-weight:700;margin-bottom:7px}.field input,.field select{width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;color:var(--ink)}.check{display:flex;align-items:center;gap:9px;margin-top:16px;font-weight:600}.check input{width:auto}
-.actions{display:flex;gap:10px;margin-top:20px}.btn{border-radius:999px;padding:12px 20px;font:700 1rem var(--font-body);cursor:pointer}.primary{border:0;background:var(--tomato);color:#fff}.secondary{border:1px solid var(--line);background:#fff;color:var(--ink)}
-.preview{display:none;margin-top:22px}.preview.show{display:block}.preview img{display:block;width:100%;max-height:380px;object-fit:contain;background:#f7f3ef;border-radius:12px;border:1px solid var(--line)}.stats{margin-top:15px;background:var(--stem-light);border-left:4px solid var(--stem);border-radius:10px;padding:15px}.download{display:none;margin-top:15px;text-align:center}.download.show{display:block}.download a{display:inline-block;background:var(--tomato);color:#fff;border-radius:999px;padding:12px 22px;font-weight:700;text-decoration:none}
-.error{display:none;margin-top:14px;background:#FFF3E0;border-left:4px solid var(--gold);padding:12px 15px;border-radius:8px}.error.show{display:block}.content{max-width:850px;margin:auto;padding:20px}.content h2{font-size:1.35rem;margin-top:28px}.content p,.content li{color:#3A322F;font-size:.95rem}.faq{border-top:1px solid var(--line);padding:14px 0}.faq h3{font-size:1rem;margin-bottom:5px}
-@media(max-width:650px){.grid{grid-template-columns:1fr}.tool-card{padding:18px}.actions{flex-direction:column}}
+:root{--ir-blue:#2f72c9;--ir-green:#168044;--ir-red:#e94b32}
+.tool-hero{padding:38px 20px 18px;text-align:center}.tool-hero h1{font-size:clamp(2rem,5vw,3rem);margin:0 0 8px}.tool-hero p{max-width:760px;margin:auto;color:var(--ink-soft)}
+.wrap{max-width:980px;margin:auto;padding:18px 20px 45px}.card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 12px 35px rgba(30,25,20,.08)}
+.topbar{display:flex;gap:8px;align-items:center;margin-bottom:16px}.tab{border:0;background:#f0f1f3;padding:12px 22px;border-radius:14px 14px 0 0;font-weight:800;font-size:1rem;cursor:pointer;color:var(--ink)}.tab.active{background:#fff;box-shadow:0 -3px 12px rgba(0,0,0,.06)}.tab:last-child{margin-left:auto;opacity:.7}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:12px 24px;font:800 1rem var(--font-body);cursor:pointer}.blue{background:var(--ir-blue);color:#fff}.red{background:var(--ir-red);color:#fff}.green{background:var(--ir-green);color:#fff}.btn:disabled{opacity:.5}
+.drop{margin-top:6px;border:2px dashed #dfe3e8;border-radius:18px;padding:34px 18px;text-align:center;background:#fbfcfe}.drop.drag{border-color:var(--ir-blue);background:#f3f8ff}.drop h2{margin:0 0 7px}.drop p{color:var(--ink-soft);margin:0 0 15px}.choose{display:inline-block;background:var(--ir-blue);color:#fff;border-radius:10px;padding:11px 20px;font-weight:800;cursor:pointer}
+.editor{display:none;margin-top:18px}.editor.show{display:block}.preview{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px}.image-panel{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fff}.canvas-wrap{min-height:320px;border-radius:14px;background:repeating-conic-gradient(#f2f2f2 0 25%,#fff 0 50%) 50%/24px 24px;display:flex;align-items:center;justify-content:center;overflow:hidden}.canvas-wrap img{max-width:100%;max-height:540px;object-fit:contain}.file-name{font-weight:800;margin-top:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.file-meta{color:var(--ink-soft);font-size:.88rem;margin-top:4px}
+.settings{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fff}.setting{padding:13px 0;border-bottom:1px solid #eee}.setting:last-child{border-bottom:0}.setting label{display:block;font-weight:800;margin-bottom:8px}.select,input[type=number]{width:100%;box-sizing:border-box;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit}.range{display:flex;align-items:center;gap:10px}.range input{flex:1}.value{min-width:58px;text-align:center;font-weight:900}.switch{display:flex;gap:8px;align-items:center}.switch input{width:20px;height:20px}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mode{border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px;cursor:pointer;text-align:left}.mode strong,.mode span{display:block}.mode span{font-size:.76rem;color:var(--ink-soft);margin-top:3px}.mode.active{border:2px solid var(--ir-blue);background:#f4f8ff}
+.results{margin-top:18px;border:1px solid var(--line);border-radius:18px;padding:16px;background:#fff}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#f7f8f9;border-radius:12px;padding:12px}.stat strong{display:block;font-size:1.15rem}.stat span{font-size:.8rem;color:var(--ink-soft)}.saved{color:var(--ir-green)}.download{text-align:center;margin-top:15px}.download a{display:inline-block;background:var(--ir-green);color:#fff;text-decoration:none;border-radius:10px;padding:13px 25px;font-weight:900}
+.error{display:none;margin-top:14px;padding:12px 15px;background:#fff2e6;border-left:4px solid #f0a13b;border-radius:8px}.error.show{display:block}.note{font-size:.84rem;color:var(--ink-soft);margin-top:12px}.content{max-width:980px;margin:auto;padding:0 20px 35px}.content h2{margin-top:25px}
+@media(max-width:760px){.preview{grid-template-columns:1fr}.canvas-wrap{min-height:240px}.settings{order:2}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}.card{padding:10px}.topbar{overflow:auto}.tab{white-space:nowrap}}
 </style>
 </head>
 <body>
 <header class="site-header"><div class="nav-wrap"><a href="index.html" class="brand"><span class="seal">🍅</span> Tool<span class="tomato-text">Tomato</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><nav class="main-nav"><a href="index.html#calculators">Calculators</a><a href="index.html#image-tools">Image Tools</a><a href="index.html#pdf-tools">PDF Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
 
-<section class="tool-hero"><span class="eyebrow">Private · Free · No Sign-up</span><h1>Image Resizer</h1><p>Resize JPG, PNG and WebP images to exact pixel dimensions directly in your browser.</p></section>
-
-<main class="tool-wrap"><div class="tool-card">
-<div class="drop-zone" id="drop"><h2>Drop an image here</h2><p>JPG, PNG or WebP · Choose an image from your device</p><label class="choose">Choose Image<input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden></label></div>
-
-<div class="controls" id="controls">
-<div class="grid">
-<div class="field"><label for="width">Width (px)</label><input id="width" type="number" min="1" max="10000" step="1"></div>
-<div class="field"><label for="height">Height (px)</label><input id="height" type="number" min="1" max="10000" step="1"></div>
-</div>
-<label class="check"><input id="aspect" type="checkbox" checked> Maintain aspect ratio</label>
-<div class="grid" style="margin-top:18px">
-<div class="field"><label for="format">Output format</label><select id="format"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WebP</option></select></div>
-<div class="field"><label for="quality">Quality <span id="quality-value">90%</span></label><input id="quality" type="range" min="10" max="100" value="90"></div>
-</div>
-<div class="actions"><button class="btn primary" id="resize" type="button">Resize Image</button><button class="btn secondary" id="reset" type="button">Reset</button></div>
-</div>
-
-<div class="error" id="error"></div>
-<section class="preview" id="preview">
-<img id="preview-img" alt="Resized image preview">
-<div class="stats"><strong id="stats"></strong><br><span id="details"></span></div>
-<div class="download" id="download"><a id="download-link" href="#" download="tooltomato-resized.jpg">Download Resized Image</a></div>
+<section class="tool-hero">
+<h1>Image Resizer</h1>
+<p>Resize images by file size, dimensions, width, height or longest side — fast, private and directly in your browser.</p>
 </section>
+
+<main class="wrap"><div class="card">
+<div class="topbar">
+<button class="tab" type="button" onclick="location.href='image-compressor.html'">Compressor</button>
+<button class="tab active">Resizer</button>
+<button class="tab">EXIF</button>
+</div>
+
+<div class="actions">
+<button class="btn blue" id="selectBtn">⬆ SELECT IMAGE</button>
+<button class="btn red" id="clearBtn">⊗ CLEAR</button>
+<input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+</div>
+
+<div class="drop" id="drop">
+<h2>Drop an image here</h2>
+<p>JPG, PNG or WebP · processed locally in your browser</p>
+<label class="choose">SELECT IMAGE<input id="dropFile" type="file" accept="image/jpeg,image/png,image/webp" hidden></label>
+</div>
+
+<div class="editor" id="editor">
+<div class="preview">
+<div class="image-panel">
+<div class="canvas-wrap"><img id="previewImg" alt="Image preview"></div>
+<div class="file-name" id="fileName"></div>
+<div class="file-meta" id="originalMeta"></div>
+</div>
+
+<div class="settings">
+<div class="setting">
+<label for="resizeType">Resize Type</label>
+<select class="select" id="resizeType">
+<option value="filesize">File Size</option>
+<option value="dimensions">Image Dimensions</option>
+<option value="width">Width</option>
+<option value="height">Height</option>
+<option value="longest">Longest Side</option>
+</select>
+</div>
+
+<div class="setting" id="fileSizeSetting">
+<label>File Size</label>
+<div class="range"><input id="targetKB" type="range" min="20" max="2000" value="250"><span class="value" id="targetKBValue">250 KB</span></div>
+</div>
+
+<div class="setting" id="dimensionsSetting" style="display:none">
+<label>Image Dimensions</label>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input id="width" type="number" min="1" placeholder="Width"><input id="height" type="number" min="1" placeholder="Height"></div>
+<label class="switch" style="margin-top:9px"><input id="lock" type="checkbox" checked> Keep aspect ratio</label>
+</div>
+
+<div class="setting" id="singleSizeSetting" style="display:none">
+<label id="singleLabel">Width</label>
+<input id="singleSize" type="number" min="1" value="1200">
+</div>
+
+<div class="setting">
+<label>Image Format</label>
+<select class="select" id="format"><option value="jpeg">JPEG</option><option value="png">PNG</option><option value="webp">WEBP</option></select>
+</div>
+
+<div class="setting" id="qualitySetting">
+<label>Image Quality</label>
+<div class="range"><input id="quality" type="range" min="10" max="95" value="75"><span class="value" id="qualityValue">75%</span></div>
+</div>
+
+<div class="setting">
+<label>Quick Presets</label>
+<div class="modes">
+<button class="mode" data-kb="100"><strong>100 KB</strong><span>Small file</span></button>
+<button class="mode active" data-kb="250"><strong>250 KB</strong><span>Balanced</span></button>
+<button class="mode" data-kb="500"><strong>500 KB</strong><span>Higher quality</span></button>
+<button class="mode" data-kb="1000"><strong>1 MB</strong><span>Large quality</span></button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="results">
+<div class="stats"><div class="stat"><strong id="before">—</strong><span>Before</span></div><div class="stat"><strong id="after">—</strong><span>After</span></div><div class="stat"><strong class="saved" id="saved">—</strong><span>Size change</span></div></div>
+<div class="download"><a id="download" href="#" download>↓ DOWNLOAD RESIZED IMAGE</a></div>
+<p class="note">File Size mode searches for a result close to your selected target while maintaining the original aspect ratio. Exact size can vary slightly by image content.</p>
+</div>
+</div>
+<div class="error" id="error"></div>
 </div></main>
 
-<section class="content">
-<h2>How to resize an image</h2>
-<ol><li>Choose a JPG, PNG or WebP image.</li><li>Enter your target width and height in pixels.</li><li>Keep aspect ratio enabled to avoid stretching, or disable it for custom dimensions.</li><li>Choose an output format and tap <strong>Resize Image</strong>.</li><li>Preview and download your resized image.</li></ol>
-<h2>Private browser-based resizing</h2>
-<p>The image is processed locally in your browser. The tool does not need to upload your photo to a server.</p>
-<h2>Frequently asked questions</h2>
-<div class="faq"><h3>Will resizing improve image quality?</h3><p>No. Resizing changes dimensions. Enlarging a small image may make it look softer, while reducing dimensions can reduce file size.</p></div>
-<div class="faq"><h3>What does maintain aspect ratio mean?</h3><p>It keeps the original width-to-height proportion so the image is less likely to look stretched or squashed.</p></div>
-<div class="faq"><h3>Can I resize images on my phone?</h3><p>Yes. The tool is designed to work in modern mobile and desktop browsers.</p></div>
-</section>
+<section class="content"><h2>Resize your image your way</h2><p>Choose a target file size, exact dimensions, width, height or longest side. JPEG, PNG and WebP output are supported.</p><h2>Private by design</h2><p>Your image is processed locally in your browser. No account is required and the selected image is not intentionally uploaded to a ToolTomato server.</p></section>
 
-<footer class="site-footer"><div class="footer-grid"><div><h4>🍅 ToolTomato</h4><p style="color:#C9BDB8;font-size:0.85rem;max-width:320px;">Free online tools — calculators, image & PDF utilities. No sign-up, no cost, runs right in your browser.</p></div><div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a><a href="affiliate-disclosure.html">Affiliate Disclosure</a></div><div><h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="dmca.html">DMCA Policy</a></div></div><div class="footer-bottom"><span>© 2026 ToolTomato. All rights reserved.</span><span>Made with 🍅 for quick everyday calculations.</span></div></footer>
-<div id="cookie-banner"><p>We use cookies to improve your experience and, in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div>
+<footer class="site-footer"><div class="footer-grid"><div><h4>🍅 ToolTomato</h4><p style="color:#C9BDB8">Free online tools — calculators, image &amp; PDF utilities.</p></div><div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a></div><div><h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="dmca.html">DMCA Policy</a></div></div><div class="footer-bottom"><span>© 2026 ToolTomato. All rights reserved.</span></div></footer>
+<div id="cookie-banner"><p>We use cookies to improve your experience, and in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div>
 
 <script src="js/main.js"></script>
 <script>
-(()=> {
-const $=id=>document.getElementById(id),fileInput=$('file'),drop=$('drop'),controls=$('controls');
-let file=null,url=null,outURL=null,ratio=1;
-const error=m=>{$('error').textContent=m;$('error').classList.add('show')},clear=()=>{$('error').classList.remove('show')};
-fileInput.onchange=e=>load(e.target.files[0]);
-drop.onclick=()=>fileInput.click();
-drop.ondragover=e=>{e.preventDefault();drop.classList.add('drag')};
-drop.ondragleave=()=>drop.classList.remove('drag');
-drop.ondrop=e=>{e.preventDefault();drop.classList.remove('drag');load(e.dataTransfer.files[0])};
-$('quality').oninput=()=> $('quality-value').textContent=$('quality').value+'%';
+(() => {
+const $=id=>document.getElementById(id);
+let file=null, objectURL=null, outputURL=null, img=null;
+let mode="filesize";
+
+function fmt(n){if(n<1024)return n+" B";if(n<1048576)return (n/1024).toFixed(1)+" KB";return (n/1048576).toFixed(2)+" MB";}
+function showError(m){$("error").textContent=m;$("error").classList.add("show");}
+function clearError(){$("error").classList.remove("show");}
+function mime(){return "image/"+$("format").value;}
+function ext(){return $("format").value==="jpeg"?"jpg":$("format").value;}
 
 function load(f){
- clear(); if(!f)return;
- if(!['image/jpeg','image/png','image/webp'].includes(f.type))return error('Please choose a JPG, PNG or WebP image.');
- if(f.size>25*1024*1024)return error('Please choose an image smaller than 25 MB.');
- file=f;if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(f);
- const img=new Image();img.onload=()=>{ratio=img.naturalWidth/img.naturalHeight;$('width').value=img.naturalWidth;$('height').value=img.naturalHeight;controls.classList.add('show')};img.src=url;
+clearError();
+if(!f)return;
+if(!/^image\/(jpeg|png|webp)$/.test(f.type))return showError("Please choose a JPG, PNG or WebP image.");
+if(f.size>20*1024*1024)return showError("Please choose an image smaller than 20 MB.");
+file=f;
+if(objectURL)URL.revokeObjectURL(objectURL);
+objectURL=URL.createObjectURL(f);
+$("previewImg").src=objectURL;
+$("fileName").textContent=f.name;
+$("originalMeta").textContent=f.type.split("/")[1].toUpperCase()+" · "+fmt(f.size);
+$("before").textContent=fmt(f.size);
+$("editor").classList.add("show");
+img=new Image();
+img.onload=()=>{ $("width").value=img.naturalWidth; $("height").value=img.naturalHeight; update(); };
+img.src=objectURL;
 }
-function updateWidth(){if(!$('aspect').checked||!ratio)return;$('height').value=Math.max(1,Math.round(Number($('width').value)/ratio))}
-function updateHeight(){if(!$('aspect').checked||!ratio)return;$('width').value=Math.max(1,Math.round(Number($('height').value)*ratio))}
-$('width').oninput=updateWidth;$('height').oninput=updateHeight;
 
-$('resize').onclick=()=>{
- clear();if(!file)return error('Please choose an image first.');
- let w=Number($('width').value),h=Number($('height').value);
- if(!Number.isInteger(w)||!Number.isInteger(h)||w<1||h<1||w>10000||h>10000)return error('Please enter valid dimensions between 1 and 10,000 pixels.');
- const img=new Image();img.onload=()=>{
-  const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
-  canvas.width=w;canvas.height=h;ctx.drawImage(img,0,0,w,h);
-  const type=$('format').value,q=Number($('quality').value)/100;
-  canvas.toBlob(blob=>{
-   if(!blob)return error('Your browser could not create the resized image.');
-   if(outURL)URL.revokeObjectURL(outURL);outURL=URL.createObjectURL(blob);
-   $('preview-img').src=outURL;$('stats').textContent=w+' × '+h+' px';
-   $('details').textContent='Original: '+img.naturalWidth+' × '+img.naturalHeight+' px · Output: '+(type==='image/webp'?'WebP':type==='image/png'?'PNG':'JPG');
-   const ext=type==='image/webp'?'webp':type==='image/png'?'png':'jpg';
-   $('download-link').href=outURL;$('download-link').download='tooltomato-resized.'+ext;$('download').classList.add('show');$('preview').classList.add('show');
-  },type,q);
- };img.onerror=()=>error('The selected image could not be read.');img.src=url;
+function updateVisibility(){
+mode=$("resizeType").value;
+$("fileSizeSetting").style.display=mode==="filesize"?"block":"none";
+$("dimensionsSetting").style.display=mode==="dimensions"?"block":"none";
+$("singleSizeSetting").style.display=["width","height","longest"].includes(mode)?"block":"none";
+$("singleLabel").textContent=mode==="width"?"Width":mode==="height"?"Height":"Longest Side";
+$("qualitySetting").style.display=$("format").value==="png"?"none":"block";
+update();
+}
+
+async function canvasBlob(canvas,q){
+return new Promise(resolve=>canvas.toBlob(resolve,mime(),q));
+}
+
+async function makeCanvas(w,h){
+const c=document.createElement("canvas");c.width=Math.max(1,Math.round(w));c.height=Math.max(1,Math.round(h));
+const ctx=c.getContext("2d",{alpha:false});ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);return c;
+}
+
+async function resizeByFileSize(){
+const target=Number($("targetKB").value)*1024;
+const aspect=img.naturalWidth/img.naturalHeight;
+let maxDim=Math.max(img.naturalWidth,img.naturalHeight);
+let scale=1;
+let best=null;
+for(let i=0;i<10;i++){
+const c=await makeCanvas(img.naturalWidth*scale,img.naturalHeight*scale);
+let lo=0.08,hi=0.98,q=Number($("quality").value)/100;
+if($("format").value==="png") return c.toDataURL("image/png");
+for(let j=0;j<7;j++){
+q=(lo+hi)/2;const b=await canvasBlob(c,q);
+if(!best||Math.abs(b.size-target)<Math.abs(best.size-target))best=b;
+if(b.size>target)hi=q;else lo=q;
+}
+if(best && best.size<=target*1.08)return best;
+scale*=0.82;
+if(scale<0.15)break;
+}
+return best;
+}
+
+async function update(){
+if(!img||!file)return;
+clearError();
+let blob=null;
+try{
+if(mode==="filesize"){
+blob=await resizeByFileSize();
+}else{
+let w=img.naturalWidth,h=img.naturalHeight;
+if(mode==="dimensions"){w=Number($("width").value)||w;h=Number($("height").value)||h;if($("lock").checked){const ratio=img.naturalWidth/img.naturalHeight;if(Number($("width").value)&&!Number($("height").value))h=w/ratio;else if(Number($("height").value)&&!Number($("width").value))w=h*ratio;}}
+if(mode==="width"){w=Number($("singleSize").value)||w;h=$("lock").checked?w*(img.naturalHeight/img.naturalWidth):Number($("height").value)||h;}
+if(mode==="height"){h=Number($("singleSize").value)||h;w=$("lock").checked?h*(img.naturalWidth/img.naturalHeight):Number($("width").value)||w;}
+if(mode==="longest"){const s=Number($("singleSize").value)||1200;if(img.naturalWidth>=img.naturalHeight){w=s;h=$("lock").checked?s*(img.naturalHeight/img.naturalWidth):h}else{h=s;w=$("lock").checked?s*(img.naturalWidth/img.naturalHeight):w;}
+}
+const c=await makeCanvas(w,h);
+blob=await canvasBlob(c,Number($("quality").value)/100);
+}
+if(!blob)throw new Error("Could not create output.");
+if(outputURL)URL.revokeObjectURL(outputURL);
+outputURL=URL.createObjectURL(blob);
+$("after").textContent=fmt(blob.size);
+const delta=((blob.size-file.size)/file.size)*100;
+$("saved").textContent=(delta<=0?Math.abs(delta).toFixed(1)+"% smaller":delta.toFixed(1)+"% larger");
+$("download").href=outputURL;
+$("download").download=file.name.replace(/\.[^.]+$/,"")+"-resized."+ext();
+}catch(e){console.error(e);showError("Could not resize this image. Try another format or smaller dimensions.");}
+}
+
+$("selectBtn").onclick=()=>$("file").click();
+$("file").onchange=e=>{load(e.target.files[0]);e.target.value="";};
+$("dropFile").onchange=e=>{load(e.target.files[0]);e.target.value="";};
+$("drop").onclick=e=>{if(!e.target.closest("label"))$("dropFile").click();};
+$("drop").ondragover=e=>{e.preventDefault();$("drop").classList.add("drag");};
+$("drop").ondragleave=()=>$("drop").classList.remove("drag");
+$("drop").ondrop=e=>{e.preventDefault();$("drop").classList.remove("drag");load(e.dataTransfer.files[0]);};
+
+$("clearBtn").onclick=()=>{
+file=null;img=null;
+if(objectURL)URL.revokeObjectURL(objectURL);
+if(outputURL)URL.revokeObjectURL(outputURL);
+objectURL=outputURL=null;
+$("editor").classList.remove("show");$("fileName").textContent="";clearError();
 };
-$('reset').onclick=()=>{file=null;fileInput.value='';controls.classList.remove('show');$('preview').classList.remove('show');$('download').classList.remove('show');clear();if(url)URL.revokeObjectURL(url);if(outURL)URL.revokeObjectURL(outURL);url=null;outURL=null};
+
+$("resizeType").onchange=updateVisibility;
+$("format").onchange=updateVisibility;
+$("quality").oninput=()=>{ $("qualityValue").textContent=$("quality").value+"%"; update(); };
+$("targetKB").oninput=()=>{ $("targetKBValue").textContent=Number($("targetKB").value)>=1024?(Number($("targetKB").value)/1024).toFixed(1)+" MB":$("targetKB").value+" KB"; update(); };
+$("width").oninput=update;$("height").oninput=update;$("singleSize").oninput=update;$("lock").onchange=update;
+
+document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>{
+$("resizeType").value="filesize";updateVisibility();
+$("targetKB").value=b.dataset.kb;$("targetKBValue").textContent=Number(b.dataset.kb)>=1024?(Number(b.dataset.kb)/1024).toFixed(1)+" MB":b.dataset.kb+" KB";
+document.querySelectorAll(".mode").forEach(x=>x.classList.toggle("active",x===b));update();
+});
 })();
 </script>
 </body>

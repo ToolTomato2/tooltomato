@@ -23,7 +23,7 @@
 <body>
 <header class="site-header"><div class="nav-wrap"><a href="index.html" class="brand"><span class="seal">🍅</span> Tool<span class="tomato-text">Tomato</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><nav class="main-nav"><a href="index.html#calculators">Calculators</a><a href="index.html#image-tools">Image Tools</a><a href="index.html#pdf-tools">PDF Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
 
-<section class="tool-hero"><h1>PDF Compressor</h1><p>Real page-image compression with Basic, Moderate and Strong modes. See the estimated size before processing and the actual size after.</p></section>
+<section class="tool-hero"><h1>PDF Compressor</h1><p>Real page-image compression with Basic, Moderate and Strong modes, including aggressive image downscaling. See the estimated size before processing and the actual size after.</p></section>
 
 <main class="wrap"><div class="card">
 <div class="drop" id="drop"><h2>Drop a PDF here</h2><p>Choose one PDF file from your device. For best results, use PDFs with scanned pages or large images.</p><label class="choose">Choose PDF<input id="file" type="file" accept="application/pdf,.pdf" hidden></label></div>
@@ -31,9 +31,9 @@
 <div class="controls" id="controls">
 <label>Compression level</label>
 <div class="levels">
-<button type="button" class="level active" data-level="basic"><strong>Basic</strong><span>Light • higher quality</span></button>
-<button type="button" class="level" data-level="moderate"><strong>Moderate</strong><span>Balanced size & quality</span></button>
-<button type="button" class="level" data-level="strong"><strong>Strong</strong><span>Smaller file • lower quality</span></button>
+<button type="button" class="level active" data-level="basic"><strong>Basic</strong><span>Good quality • smaller</span></button>
+<button type="button" class="level" data-level="moderate"><strong>Moderate</strong><span>Much smaller • balanced</span></button>
+<button type="button" class="level" data-level="strong"><strong>Strong</strong><span>Maximum reduction</span></button>
 </div>
 
 <div class="info" id="info"></div>
@@ -50,7 +50,7 @@
 
 <section class="content">
 <h2>How it works</h2>
-<p>Each page is rendered in your browser and rebuilt as a JPEG at a level-specific resolution and quality. This gives Basic, Moderate and Strong modes a real compression difference instead of only changing PDF metadata.</p>
+<p>Each page is rendered in your browser and rebuilt as a JPEG at a level-specific resolution and quality. Moderate and Strong intentionally reduce page resolution and JPEG quality much more aggressively. This gives Basic, Moderate and Strong modes a real compression difference instead of only changing PDF metadata.</p>
 <h2>Privacy</h2>
 <p>Your selected PDF is processed locally in your browser. It is not intentionally uploaded to a ToolTomato server.</p>
 </section>
@@ -70,9 +70,9 @@ const $ = id => document.getElementById(id);
 let file = null, outputURL = null, level = "basic";
 
 const settings = {
-  basic:    { scale: 1.25, quality: 0.82 },
-  moderate: { scale: 1.00, quality: 0.62 },
-  strong:   { scale: 0.78, quality: 0.45 }
+  basic:    { scale: 1.00, quality: 0.72 },
+  moderate: { scale: 0.72, quality: 0.48 },
+  strong:   { scale: 0.50, quality: 0.28 }
 };
 
 function formatSize(bytes) {
@@ -94,7 +94,7 @@ function updateEstimate() {
   if (!file) return;
   const s = settings[level];
   // Planning estimate only; actual size is shown after compression.
-  const factor = level === "basic" ? 0.78 : level === "moderate" ? 0.55 : 0.38;
+  const factor = level === "basic" ? 0.68 : level === "moderate" ? 0.45 : 0.28;
   const estimate = Math.max(1024, file.size * factor);
   $("estimate").textContent = "≈ " + formatSize(estimate);
 }

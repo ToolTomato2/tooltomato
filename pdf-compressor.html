@@ -1,7 +1,165 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PDF Compressor | ToolTomato</title><meta name="description" content="Optimize and re-save a PDF in your browser."><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/style.css"><script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script><style>
-.tool-hero{padding:42px 20px 20px;text-align:center}.tool-hero h1{font-size:clamp(2rem,5vw,3rem)}.tool-hero p{max-width:700px;margin:auto;color:var(--ink-soft)}.wrap{max-width:850px;margin:auto;padding:20px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-card)}.drop{border:2px dashed var(--line);border-radius:16px;padding:38px;text-align:center;background:#fff;cursor:pointer}.choose,.btn,.download a{display:inline-block;margin-top:12px;background:var(--tomato);color:#fff;border:0;border-radius:999px;padding:11px 20px;font-weight:700;text-decoration:none;cursor:pointer}.controls{display:none;margin-top:20px}.controls.show{display:block}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field label{display:block;font-weight:700;margin-bottom:6px}.field input,.field select{width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit}.actions{display:flex;gap:10px;margin-top:18px}.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}.preview,.download{display:none;margin-top:20px}.preview.show,.download.show{display:block}.preview img{max-width:100%;max-height:400px;display:block;margin:auto;border:1px solid var(--line);border-radius:10px}.stats{margin-top:15px;padding:14px;background:var(--stem-light);border-left:4px solid var(--stem);border-radius:10px}.error{display:none;margin-top:14px;padding:12px;background:#FFF3E0;border-left:4px solid var(--gold);border-radius:8px}.error.show{display:block}.content{max-width:850px;margin:auto;padding:20px}@media(max-width:650px){.grid{grid-template-columns:1fr}.actions{flex-direction:column}}
-</style></head><body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF Compressor — Free Online | ToolTomato</title>
+<meta name="description" content="Reduce and optimize PDF file size directly in your browser. Compare original and optimized file sizes and download the result.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.tool-hero{padding:42px 20px 20px;text-align:center}.tool-hero h1{font-size:clamp(2rem,5vw,3rem)}.tool-hero p{max-width:720px;margin:auto;color:var(--ink-soft)}
+.wrap{max-width:850px;margin:auto;padding:20px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow-card)}
+.drop{border:2px dashed var(--line);border-radius:16px;padding:38px 20px;text-align:center;background:#fff;cursor:pointer}.drop.drag{border-color:var(--tomato);background:#fff7f3}.drop h2{margin:0 0 8px}.drop p{color:var(--ink-soft)}.choose{display:inline-block;background:var(--tomato);color:#fff;border-radius:999px;padding:11px 20px;font-weight:700;cursor:pointer}
+.controls{display:none;margin-top:20px}.controls.show{display:block}.field label{display:block;font-weight:700;margin-bottom:7px}.field select{width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+.info{margin:14px 0;padding:14px;background:var(--stem-light);border-left:4px solid var(--stem);border-radius:10px}.actions{display:flex;gap:10px;margin-top:18px}.btn{border:0;border-radius:999px;padding:12px 20px;font:700 1rem var(--font-body);background:var(--tomato);color:#fff;cursor:pointer}.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.progress{display:none;margin-top:18px}.progress.show{display:block}.bar{height:10px;background:#eee;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:var(--tomato);transition:width .2s}.progress p{font-size:.9rem;color:var(--ink-soft)}
+.result{display:none;margin-top:20px;padding:18px;background:var(--stem-light);border-left:4px solid var(--stem);border-radius:10px}.result.show{display:block}.download{margin-top:15px}.download a{display:inline-block;background:var(--tomato);color:#fff;border-radius:999px;padding:12px 22px;font-weight:700;text-decoration:none}
+.error{display:none;margin-top:14px;padding:12px 15px;background:#FFF3E0;border-left:4px solid var(--gold);border-radius:8px}.error.show{display:block}.content{max-width:850px;margin:auto;padding:20px}.content h2{margin-top:28px}
+@media(max-width:650px){.card{padding:18px}.actions{flex-direction:column}}
+</style>
+</head>
+<body>
 <header class="site-header"><div class="nav-wrap"><a href="index.html" class="brand"><span class="seal">🍅</span> Tool<span class="tomato-text">Tomato</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><nav class="main-nav"><a href="index.html#calculators">Calculators</a><a href="index.html#image-tools">Image Tools</a><a href="index.html#pdf-tools">PDF Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
-<section class="tool-hero"><h1>PDF Compressor</h1><p>Optimize and re-save a PDF in your browser.</p></section><main class="wrap"><div class="card"><div class="drop"><h2>Select a PDF</h2><p>Choose a PDF file</p><label class="choose">Choose PDF<input id="file" type="file" accept="application/pdf" hidden></label></div><div class="controls" id="controls"><button class="btn" id="go">Optimize PDF</button><p id="info"></p></div><div class="download" id="download"><a id="link">Download PDF</a></div></div></main><section class="content"><h2>Private browser-based tool</h2><p>This tool is designed to process files locally in your browser where supported. Results are provided for general use.</p></section>
+
+<section class="tool-hero"><h1>PDF Compressor</h1><p>Optimize a PDF directly in your browser and download the processed file. No account required.</p></section>
+
+<main class="wrap"><div class="card">
+<div class="drop" id="drop"><h2>Drop a PDF here</h2><p>Choose one PDF file from your device.</p><label class="choose">Choose PDF<input id="file" type="file" accept="application/pdf,.pdf" hidden></label></div>
+
+<div class="controls" id="controls">
+<div class="field"><label for="level">Optimization level</label><select id="level"><option value="standard">Standard — balanced</option><option value="maximum">Maximum — stronger object optimization</option></select></div>
+<div class="info" id="info"></div>
+<div class="actions"><button class="btn" id="process" type="button">Optimize PDF</button><button class="btn secondary" id="reset" type="button">Reset</button></div>
+<div class="progress" id="progress"><div class="bar"><span id="bar"></span></div><p id="progress-text">Preparing…</p></div>
+</div>
+
+<div class="error" id="error"></div>
+<div class="result" id="result"><strong id="result-title"></strong><div id="result-details" style="margin-top:6px"></div><div class="download"><a id="download-link" href="#" download="tooltomato-optimized.pdf">Download Optimized PDF</a></div></div>
+</div></main>
+
+<section class="content">
+<h2>Important note</h2>
+<p>PDF compression is format-dependent. This browser tool focuses on structural optimization and object-stream compression. It does not re-encode embedded images, so some PDFs may become only slightly smaller or even remain similar in size.</p>
+<h2>Privacy</h2>
+<p>The selected PDF is processed in your browser. It is not intentionally uploaded to a ToolTomato server.</p>
+</section>
+
 <footer class="site-footer"><div class="footer-grid"><div><h4>🍅 ToolTomato</h4><p style="color:#C9BDB8">Free online tools — calculators, image & PDF utilities.</p></div><div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a></div><div><h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="dmca.html">DMCA Policy</a></div></div><div class="footer-bottom"><span>© 2026 ToolTomato. All rights reserved.</span></div></footer>
-<div id="cookie-banner"><p>We use cookies to improve your experience, and in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div><script src="js/main.js"></script><script>(()=>{let f;const $=x=>document.getElementById(x);$("file").onchange=e=>{f=e.target.files[0];if(f)$("controls").classList.add("show")};$("go").onclick=async()=>{if(!f)return;let s=await PDFLib.PDFDocument.load(await f.arrayBuffer()),o=await PDFLib.PDFDocument.create(),p=await o.copyPages(s,s.getPageIndices());p.forEach(x=>o.addPage(x));let b=await o.save({useObjectStreams:true}),u=URL.createObjectURL(new Blob([b],{type:"application/pdf"}));$("info").textContent="Original "+(f.size/1024).toFixed(1)+" KB · Output "+(b.length/1024).toFixed(1)+" KB";$("link").href=u;$("link").download="tooltomato-optimized.pdf";$("download").classList.add("show")}})()</script></body></html>
+<div id="cookie-banner"><p>We use cookies to improve your experience, and in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div>
+
+<script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let file = null, outputURL = null;
+
+  function error(msg) {
+    $('error').textContent = msg;
+    $('error').classList.add('show');
+  }
+  function clearError() { $('error').classList.remove('show'); }
+
+  function setProgress(p, text) {
+    $('progress').classList.add('show');
+    $('bar').style.width = p + '%';
+    $('progress-text').textContent = text;
+  }
+
+  function loadFile(f) {
+    clearError();
+    if (!f) return;
+    if (!(f.type === 'application/pdf' || /\.pdf$/i.test(f.name))) return error('Please choose a valid PDF file.');
+    if (f.size > 100 * 1024 * 1024) return error('Please choose a PDF smaller than 100 MB.');
+    file = f;
+    $('info').textContent = 'Original size: ' + (f.size / 1024 / 1024).toFixed(2) + ' MB · ' + f.name;
+    $('controls').classList.add('show');
+    $('result').classList.remove('show');
+  }
+
+  $('file').addEventListener('change', e => {
+    loadFile(e.target.files[0]);
+    e.target.value = '';
+  });
+  $('drop').addEventListener('click', e => {
+    if (!e.target.closest('label')) $('file').click();
+  });
+  $('drop').addEventListener('dragover', e => {
+    e.preventDefault();
+    $('drop').classList.add('drag');
+  });
+  $('drop').addEventListener('dragleave', () => $('drop').classList.remove('drag'));
+  $('drop').addEventListener('drop', e => {
+    e.preventDefault();
+    $('drop').classList.remove('drag');
+    loadFile(e.dataTransfer.files[0]);
+  });
+
+  $('process').addEventListener('click', async () => {
+    clearError();
+    $('result').classList.remove('show');
+    if (!file) return error('Please choose a PDF first.');
+    if (!window.PDFLib) return error('PDF engine could not load. Check your internet connection and try again.');
+
+    $('process').disabled = true;
+    try {
+      setProgress(15, 'Reading PDF…');
+      const src = await PDFLib.PDFDocument.load(await file.arrayBuffer(), {
+        ignoreEncryption: false,
+        throwOnInvalidObject: false,
+        updateMetadata: false
+      });
+
+      setProgress(45, 'Rebuilding PDF structure…');
+      const out = await PDFLib.PDFDocument.create();
+      const pages = await out.copyPages(src, src.getPageIndices());
+      pages.forEach(page => out.addPage(page));
+
+      setProgress(75, 'Applying object-stream optimization…');
+      const maximum = $('level').value === 'maximum';
+      const bytes = await out.save({
+        useObjectStreams: true,
+        addDefaultPage: false,
+        objectsPerTick: maximum ? 50 : 100
+      });
+
+      setProgress(100, 'Finished.');
+      if (outputURL) URL.revokeObjectURL(outputURL);
+      outputURL = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+
+      const oldSize = file.size;
+      const newSize = bytes.length;
+      const percent = oldSize ? ((1 - newSize / oldSize) * 100) : 0;
+
+      $('result-title').textContent = percent > 0
+        ? 'PDF reduced by ' + percent.toFixed(1) + '%'
+        : 'PDF processed successfully';
+      $('result-details').textContent =
+        'Original: ' + (oldSize / 1024 / 1024).toFixed(2) + ' MB · Output: ' +
+        (newSize / 1024 / 1024).toFixed(2) + ' MB';
+
+      $('download-link').href = outputURL;
+      $('result').classList.add('show');
+    } catch (e) {
+      console.error(e);
+      error('Could not process this PDF. It may be password-protected, damaged, or unsupported.');
+    } finally {
+      $('process').disabled = false;
+    }
+  });
+
+  $('reset').addEventListener('click', () => {
+    file = null;
+    clearError();
+    $('controls').classList.remove('show');
+    $('result').classList.remove('show');
+    $('progress').classList.remove('show');
+    $('bar').style.width = '0%';
+    if (outputURL) URL.revokeObjectURL(outputURL);
+    outputURL = null;
+  });
+})();
+</script>
+</body>
+</html>

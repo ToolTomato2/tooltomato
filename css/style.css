@@ -1,1 +1,199 @@
+/* =========================================================
+   TOOLTOMATO — Design Tokens
+   ========================================================= */
+:root{
+  --tomato: #E4472A;
+  --tomato-dark: #B8341C;
+  --stem: #4C7A51;
+  --stem-light: #E9F2E8;
+  --cream: #FFF9F4;
+  --paper: #FFFFFF;
+  --ink: #241E1C;
+  --ink-soft: #6B5F5A;
+  --line: #F0E3DA;
+  --gold: #FFC857;
 
+  --font-display: 'Baloo 2', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --radius-seal: 999px;
+  --radius-card: 18px;
+  --shadow-card: 0 4px 18px rgba(36,30,28,0.06);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  font-weight:700;
+  margin:0 0 0.4em 0;
+  letter-spacing:-0.01em;
+}
+a{color:var(--tomato-dark);}
+a:focus-visible, button:focus-visible, input:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:2px;
+}
+img{max-width:100%;display:block;}
+.container{max-width:1100px;margin:0 auto;padding:0 20px;}
+
+/* ---------- Header ---------- */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+}
+.nav-wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 20px; max-width:1100px; margin:0 auto;
+}
+.brand{
+  display:flex; align-items:center; gap:8px;
+  font-family:var(--font-display); font-size:1.4rem; font-weight:800;
+  color:var(--ink); text-decoration:none;
+}
+.brand .seal{
+  width:34px;height:34px;border-radius:var(--radius-seal);
+  background:var(--tomato); display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:1.1rem;
+}
+.brand .tomato-text{color:var(--tomato-dark);}
+nav.main-nav{display:flex; gap:22px; align-items:center;}
+nav.main-nav a{
+  color:var(--ink); text-decoration:none; font-weight:600; font-size:0.95rem;
+}
+nav.main-nav a:hover{color:var(--tomato-dark);}
+.nav-toggle{
+  display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--ink);
+}
+
+/* ---------- Hero / Search ---------- */
+.hero{
+  padding:56px 20px 40px; text-align:center;
+}
+.hero .eyebrow{
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--stem-light); color:var(--stem);
+  padding:6px 14px; border-radius:var(--radius-seal);
+  font-size:0.8rem; font-weight:700; letter-spacing:0.02em; text-transform:uppercase;
+}
+.hero h1{
+  font-size:clamp(2rem, 5vw, 3.2rem);
+  margin:18px 0 10px;
+}
+.hero p.sub{
+  color:var(--ink-soft); max-width:560px; margin:0 auto 28px; font-size:1.05rem;
+}
+.search-box{
+  max-width:560px; margin:0 auto;
+  display:flex; background:var(--paper); border:2px solid var(--line);
+  border-radius:var(--radius-seal); padding:6px 6px 6px 20px;
+  box-shadow:var(--shadow-card);
+}
+.search-box input{
+  flex:1; border:none; background:transparent; font-size:1rem;
+  font-family:var(--font-body); color:var(--ink); outline:none;
+}
+.search-box button{
+  background:var(--tomato); color:#fff; border:none;
+  padding:10px 22px; border-radius:var(--radius-seal);
+  font-weight:700; cursor:pointer; font-family:var(--font-body);
+}
+.search-box button:hover{background:var(--tomato-dark);}
+.no-results{display:none; color:var(--ink-soft); margin-top:14px; font-size:0.9rem;}
+
+/* ---------- Sections ---------- */
+.section{padding:36px 20px;}
+.section-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:18px;}
+.section-head h2{font-size:1.5rem;}
+
+/* ---------- Category / Tool grid ---------- */
+.grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+  gap:16px;
+}
+.card{
+  background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-card);
+  padding:20px; text-decoration:none; color:var(--ink);
+  box-shadow:var(--shadow-card); transition:transform .15s ease, box-shadow .15s ease;
+}
+.card:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(36,30,28,0.10);}
+.card .icon{
+  width:44px; height:44px; border-radius:var(--radius-seal);
+  background:var(--stem-light); color:var(--stem);
+  display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:12px;
+}
+.card h3{font-size:1.05rem; margin-bottom:4px;}
+.card p{font-size:0.85rem; color:var(--ink-soft); margin:0;}
+.badge{
+  display:inline-block; margin-top:10px; font-size:0.72rem; font-weight:700;
+  background:var(--gold); color:#5A3E00; padding:3px 10px; border-radius:var(--radius-seal);
+}
+
+/* ---------- Disclaimer / info box (used inside tool pages) ---------- */
+.notice{
+  background:var(--stem-light); border-left:4px solid var(--stem);
+  padding:14px 18px; border-radius:8px; font-size:0.88rem; color:#2E4A31; margin:20px 0;
+}
+.notice.warn{background:#FFF3E0; border-left-color:var(--gold); color:#6B4E00;}
+
+/* ---------- Legal / content pages ---------- */
+.legal{padding:48px 20px; max-width:820px; margin:0 auto;}
+.legal h1{margin-bottom:6px;}
+.legal .updated{color:var(--ink-soft); font-size:0.85rem; margin-bottom:28px;}
+.legal h2{font-size:1.2rem; margin-top:30px;}
+.legal p, .legal li{color:#3A322F; font-size:0.95rem;}
+
+/* ---------- Footer ---------- */
+footer.site-footer{
+  background:var(--ink); color:#EFE7E2; padding:40px 20px 24px; margin-top:40px;
+}
+.footer-grid{
+  max-width:1100px; margin:0 auto; display:grid;
+  grid-template-columns:2fr 1fr 1fr; gap:30px;
+}
+.footer-grid h4{color:#fff; font-size:0.9rem; margin-bottom:12px;}
+.footer-grid a{color:#C9BDB8; text-decoration:none; font-size:0.88rem; display:block; margin-bottom:8px;}
+.footer-grid a:hover{color:var(--gold);}
+.footer-bottom{
+  max-width:1100px; margin:26px auto 0; padding-top:18px; border-top:1px solid #3A322F;
+  font-size:0.78rem; color:#9A8D88; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+}
+
+/* ---------- Cookie consent banner ---------- */
+#cookie-banner{
+  position:fixed; left:16px; right:16px; bottom:16px; z-index:200;
+  max-width:640px; margin:0 auto;
+  background:var(--ink); color:#fff; padding:18px 20px; border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  display:none; gap:14px; align-items:center; flex-wrap:wrap;
+}
+#cookie-banner p{margin:0; font-size:0.85rem; flex:1; min-width:200px; color:#EFE7E2;}
+#cookie-banner a{color:var(--gold);}
+#cookie-banner .actions{display:flex; gap:10px;}
+#cookie-banner button{
+  border:none; border-radius:var(--radius-seal); padding:9px 16px; font-weight:700; cursor:pointer; font-size:0.85rem;
+}
+#cookie-accept{background:var(--tomato); color:#fff;}
+#cookie-decline{background:transparent; color:#EFE7E2; border:1px solid #5A4F4A;}
+
+/* ---------- Responsive ---------- */
+@media (max-width:760px){
+  nav.main-nav{
+    position:absolute; top:100%; left:0; right:0; background:var(--paper);
+    flex-direction:column; align-items:flex-start; padding:16px 20px;
+    border-bottom:1px solid var(--line); display:none; gap:14px;
+  }
+  nav.main-nav.open{display:flex;}
+  .nav-toggle{display:block;}
+  .footer-grid{grid-template-columns:1fr; gap:20px;}
+}

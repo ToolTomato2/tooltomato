@@ -111,10 +111,79 @@ nav.main-nav a:hover{color:var(--tomato-dark);}
 .search-box button:hover{background:var(--tomato-dark);}
 .no-results{display:none; color:var(--ink-soft); margin-top:14px; font-size:0.9rem;}
 
+/* ---------- Hero stats row ---------- */
+.stats-row{
+  display:flex; justify-content:center; gap:40px; margin-top:26px; flex-wrap:wrap;
+}
+.stats-row .stat{text-align:center;}
+.stats-row .stat strong{
+  display:block; font-family:var(--font-display); font-size:1.6rem; color:var(--tomato-dark);
+}
+.stats-row .stat span{font-size:0.72rem; color:var(--ink-soft); letter-spacing:0.06em; text-transform:uppercase;}
+
 /* ---------- Sections ---------- */
 .section{padding:36px 20px;}
-.section-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:18px;}
-.section-head h2{font-size:1.5rem;}
+.section-head{margin-bottom:18px; text-align:center;}
+.section-head h2{font-size:1.6rem;}
+.section-head p{color:var(--ink-soft); font-size:0.92rem; margin-top:4px;}
+
+/* ---------- Category list (row cards) ---------- */
+.category-list{display:flex; flex-direction:column; gap:12px; max-width:640px; margin:0 auto;}
+.category-row{
+  display:flex; align-items:center; gap:16px;
+  background:var(--paper); border:1px solid var(--line); border-radius:16px;
+  padding:16px 18px; text-decoration:none; color:var(--ink);
+  box-shadow:var(--shadow-card);
+}
+.category-row .cicon{
+  width:46px; height:46px; border-radius:12px; flex:none;
+  display:flex; align-items:center; justify-content:center; font-size:1.3rem;
+  background:var(--stem-light);
+}
+.category-row .ctext{flex:1;}
+.category-row h3{font-size:1rem; margin:0 0 2px 0; display:flex; align-items:center; gap:8px;}
+.category-row p{margin:0; font-size:0.82rem; color:var(--ink-soft);}
+.category-row .arrow{color:var(--tomato); font-size:1.1rem;}
+.tag-soon{
+  font-size:0.65rem; font-weight:800; background:var(--gold); color:#5A3E00;
+  padding:2px 8px; border-radius:var(--radius-seal); text-transform:uppercase;
+}
+
+/* ---------- Popular tools list ---------- */
+.popular-list{display:flex; flex-direction:column; gap:10px; max-width:640px; margin:0 auto;}
+.popular-row{
+  display:flex; align-items:center; gap:14px;
+  background:var(--paper); border:1px solid var(--line); border-radius:14px;
+  padding:14px 16px; text-decoration:none; color:var(--ink);
+}
+.popular-row .picon{font-size:1.2rem; flex:none;}
+.popular-row h3{font-size:0.95rem; margin:0;}
+.popular-row p{margin:0; font-size:0.8rem; color:var(--ink-soft);}
+
+/* ---------- Trust section (dark) ---------- */
+.trust-section{background:var(--ink); color:#fff; padding:52px 20px; text-align:center;}
+.trust-section .eyebrow-line{color:#B7ABA6; font-size:0.9rem; margin-bottom:6px;}
+.trust-section h2{font-size:1.8rem; margin-bottom:34px;}
+.trust-section h2 .accent{color:var(--tomato);}
+.trust-grid{
+  max-width:900px; margin:0 auto; display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:30px;
+}
+.trust-item .emoji{font-size:1.8rem; margin-bottom:10px;}
+.trust-item h3{font-size:1.05rem; margin-bottom:6px;}
+.trust-item p{font-size:0.82rem; color:#B7ABA6; margin:0;}
+
+/* ---------- CTA banner ---------- */
+.cta-banner{
+  margin:20px; padding:44px 28px; border-radius:24px; text-align:center;
+  background:linear-gradient(135deg, var(--tomato), var(--tomato-dark)); color:#fff;
+}
+.cta-banner h2{font-size:1.5rem; margin-bottom:10px; color:#fff;}
+.cta-banner p{max-width:480px; margin:0 auto 22px; color:#FFE3DA; font-size:0.92rem;}
+.cta-banner a.btn{
+  display:inline-block; background:#fff; color:var(--tomato-dark);
+  padding:12px 26px; border-radius:var(--radius-seal); font-weight:700; text-decoration:none;
+}
 
 /* ---------- Category / Tool grid ---------- */
 .grid{
@@ -197,3 +266,23 @@ footer.site-footer{
   .nav-toggle{display:block;}
   .footer-grid{grid-template-columns:1fr; gap:20px;}
 }
+
+/* ---------- ToolTomato scale-up homepage ---------- */
+.hero .accent,.section-head .accent{color:var(--tomato);}
+.quick-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px auto 0;}
+.quick-pills a{background:var(--paper);border:1px solid var(--line);padding:7px 13px;border-radius:999px;text-decoration:none;color:var(--ink);font-size:.78rem;font-weight:700;box-shadow:var(--shadow-card);}
+.quick-pills a:hover{border-color:var(--tomato);color:var(--tomato-dark);}
+.stats-badge{max-width:620px;margin:28px auto 0;padding:15px 10px;border:2px solid #F3C7B9;background:#FFFDFC;border-radius:999px;display:grid;grid-template-columns:repeat(3,1fr);box-shadow:var(--shadow-card);}
+.stats-badge div{text-align:center;border-right:1px solid var(--line);}
+.stats-badge div:last-child{border-right:0;}
+.stats-badge strong{display:block;color:var(--tomato);font-family:var(--font-display);font-size:1.55rem;line-height:1.1;}
+.stats-badge span{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);}
+.category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:900px;margin:0 auto;}
+.category-card{display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:20px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow-card);min-height:112px;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease;}
+.category-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(36,30,28,.10);border-color:#E8B7A9;}
+.category-card .cicon{width:58px;height:58px;flex:none;border-radius:16px;background:var(--stem-light);display:flex;align-items:center;justify-content:center;font-size:1.65rem;}
+.category-card h3{font-size:1.15rem;margin:0 0 2px;}.category-card p{font-size:.82rem;color:var(--ink-soft);margin:0 0 5px;}.category-card span{font-size:.72rem;color:var(--tomato-dark);font-weight:700;}.category-card b{font:700 .6rem var(--font-body);background:var(--gold);color:#5A3E00;padding:3px 7px;border-radius:999px;text-transform:uppercase;vertical-align:middle;margin-left:4px;}
+.category-card.coming{opacity:.92;}.category-card.coming .cicon{background:#FFF2DE;}
+.popular-section{background:#FFFDFB;}
+.popular-list{max-width:760px;}.popular-row{position:relative;}.popular-row .arrow{margin-left:auto;color:var(--tomato);font-weight:800;font-size:1.1rem;}
+@media(max-width:760px){.category-grid{grid-template-columns:1fr;}.category-card{min-height:96px;padding:17px;}.stats-badge{margin-left:8px;margin-right:8px;}.hero{padding-top:42px;}}

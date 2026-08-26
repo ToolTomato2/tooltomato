@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>8th Pay Commission Salary Calculator 2026 — ToolTomato</title>
+<meta name="description" content="Estimate your 8th Pay Commission salary using an adjustable fitment factor. Compare current and projected basic pay, DA, HRA, TA and gross salary.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fffaf7;color:#241d1a;font-family:Inter,system-ui,sans-serif;line-height:1.55}
+header{background:#fff;border-bottom:1px solid #eadfd9;position:sticky;top:0;z-index:5}.nav{max-width:1050px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between}.brand{font:800 1.45rem "Baloo 2";color:#241d1a;text-decoration:none}.brand span{color:#e84c32}.back{color:#176d43;text-decoration:none;font-weight:700}
+main{max-width:980px;margin:auto;padding:34px 18px 60px}.hero{text-align:center;max-width:760px;margin:0 auto 24px}.eyebrow{display:inline-block;background:#eaf7ef;color:#176d43;padding:6px 12px;border-radius:999px;font-size:.8rem;font-weight:800}.hero h1{font:800 clamp(2rem,5vw,3.2rem)/1.05 "Baloo 2";margin:12px 0 10px}.hero p{color:#665b56;margin:0}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.card{background:#fff;border:1px solid #eadfd9;border-radius:22px;padding:20px;box-shadow:0 12px 35px #3620180d}.card h2{font:800 1.45rem "Baloo 2";margin:0 0 15px}.field{margin:0 0 14px}.field label{display:block;font-weight:700;font-size:.9rem;margin-bottom:6px}.input,.select{width:100%;padding:12px;border:1px solid #d9ccc5;border-radius:11px;font:inherit;background:#fff}.hint{font-size:.75rem;color:#756b66;margin-top:4px}
+.factor{display:flex;gap:8px}.factor input{flex:1}.quick{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.quick button{border:1px solid #d9ccc5;background:#fff;border-radius:9px;padding:7px 10px;font-weight:700;cursor:pointer}.quick button:hover{border-color:#176d43}
+.btn{width:100%;border:0;border-radius:12px;padding:14px;background:#176d43;color:#fff;font-size:1rem;font-weight:800;cursor:pointer;margin-top:5px}.btn:hover{filter:brightness(.96)}
+.result-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.pill{padding:5px 9px;border-radius:999px;background:#fff2df;color:#9a5b00;font-size:.72rem;font-weight:800}.rows{margin-top:10px}.row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid #eee5e0}.row:last-child{border-bottom:0}.row strong{font-weight:800}.total{margin-top:12px;padding:16px;border-radius:15px;background:#eaf7ef}.total .big{font-size:1.65rem;font-weight:900;color:#176d43}.diff{font-size:1rem;font-weight:800}.positive{color:#176d43}
+.note{margin-top:18px;padding:13px 15px;border-left:4px solid #e6a13c;background:#fff6e9;border-radius:8px;font-size:.86rem}.content{margin-top:20px}.content h2{font:800 1.5rem "Baloo 2"}.content h3{font-size:1.05rem}.content p,.content li{color:#625852}.faq{border-top:1px solid #eadfd9;padding-top:14px}.faq h3{margin-bottom:4px}
+footer{text-align:center;padding:25px 18px;border-top:1px solid #eadfd9;color:#756b66;font-size:.82rem}
+@media(max-width:760px){.grid{grid-template-columns:1fr}main{padding-top:25px}.nav{padding:12px 15px}.hero h1{font-size:2.25rem}}
+</style>
+</head>
+<body>
+<header><div class="nav"><a class="brand" href="index.html">🍅 Tool<span>Tomato</span></a><a class="back" href="index.html">← All Tools</a></div></header>
+<main>
+<section class="hero">
+<span class="eyebrow">Government Salary Tools · 2026</span>
+<h1>8th Pay Commission Salary Calculator</h1>
+<p>Estimate a possible revised salary using your own assumed fitment factor. No official 8th CPC pay matrix is assumed.</p>
+</section>
+<div class="grid">
+<section class="card">
+<h2>Enter your current salary</h2>
+<div class="field"><label for="basic">Current Basic Pay (₹)</label><input class="input" id="basic" type="number" min="0" step="100" value="30000"></div>
+<div class="field"><label for="da">Current DA (%)</label><input class="input" id="da" type="number" min="0" step=".1" value="58"></div>
+<div class="field"><label for="hra">HRA (%)</label><input class="input" id="hra" type="number" min="0" step=".1" value="18"></div>
+<div class="field"><label for="ta">Transport Allowance (₹ / month)</label><input class="input" id="ta" type="number" min="0" step="100" value="1800"></div>
+<div class="field">
+<label for="factor">Assumed 8th CPC Fitment Factor</label>
+<div class="factor"><input class="input" id="factor" type="number" min=".1" step=".01" value="2.57"></div>
+<div class="quick"><button type="button" data-f="1.92">1.92×</button><button type="button" data-f="2.00">2.00×</button><button type="button" data-f="2.28">2.28×</button><button type="button" data-f="2.57">2.57×</button><button type="button" data-f="3.00">3.00×</button></div>
+<div class="hint">This is an assumption chosen by you, not an official 8th CPC fitment factor.</div>
+</div>
+<button class="btn" id="calc">Calculate Projection</button>
+</section>
+<section class="card">
+<div class="result-head"><h2>Salary projection</h2><span class="pill">ESTIMATE</span></div>
+<div class="rows">
+<div class="row"><span>Current Basic</span><strong id="rBasic">₹30,000</strong></div>
+<div class="row"><span>Current DA</span><strong id="rDa">₹17,400</strong></div>
+<div class="row"><span>Current HRA</span><strong id="rHra">₹5,400</strong></div>
+<div class="row"><span>Current TA</span><strong id="rTa">₹1,800</strong></div>
+</div>
+<div class="total"><div>Current estimated gross</div><div class="big" id="currentGross">₹54,600</div></div>
+<div class="rows" style="margin-top:15px">
+<div class="row"><span>Projected Basic</span><strong id="pBasic">₹77,100</strong></div>
+<div class="row"><span>Projected DA</span><strong id="pDa">₹0</strong></div>
+<div class="row"><span>Projected HRA</span><strong id="pHra">₹13,878</strong></div>
+<div class="row"><span>Projected TA</span><strong id="pTa">₹1,800</strong></div>
+</div>
+<div class="total"><div>Projected estimated gross</div><div class="big" id="projectedGross">₹92,778</div><div class="diff positive" id="difference">+₹38,178 / month</div><div id="annual">+₹4,58,136 / year</div></div>
+</section>
+</div>
+<div class="note"><strong>Important:</strong> This calculator is an estimate only. The 8th Central Pay Commission's final recommendations, pay matrix, fitment factor and allowance rules may differ. Do not use this projection as an official salary notification or for financial/legal decisions.</div>
+<section class="content">
+<h2>How this calculator works</h2>
+<p>The projected basic pay is calculated using your selected assumed fitment factor. HRA is then estimated using the HRA percentage you enter. Projected DA is shown as zero by default because the future 8th CPC DA rate is not known; you can adapt the tool later when official rules are published.</p>
+<h2>Why use an assumed fitment factor?</h2>
+<p>The fitment factor is a key variable in pay-revision projections. Since the final 8th CPC recommendation is not yet an official published pay matrix, ToolTomato lets you test different assumptions instead of presenting speculation as fact.</p>
+<div class="faq"><h2>Frequently asked questions</h2><h3>Is this the official 8th Pay Commission calculator?</h3><p>No. It is an independent projection tool. Official 8th CPC figures should be used once the Government publishes the applicable recommendations and rules.</p><h3>Can I change the fitment factor?</h3><p>Yes. Enter any assumption you want and compare the projected result.</p><h3>Does this calculate final in-hand salary?</h3><p>No. It estimates gross salary from the inputs provided. Deductions such as NPS, CGHS, income tax and other recoveries are not included.</p></div>
+<h2>Related ToolTomato tools</h2>
+<p><a href="gst-calculator.html">GST Calculator</a> · <a href="emi-loan-sip.html">EMI / Loan / SIP</a> · <a href="age-calculator.html">Age Calculator</a></p>
+</section>
+</main>
+<footer>© 2026 ToolTomato · Free online utility tools · Estimates only where stated.</footer>
+<script>
+const ids=['basic','da','hra','ta','factor'];
+const money=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(Math.round(n));
+function calc(){
+ const basic=+basicEl.value||0, da=+daEl.value||0, hra=+hraEl.value||0, ta=+taEl.value||0, factor=+factorEl.value||1;
+ const cDa=basic*da/100, cHra=basic*hra/100, current=basic+cDa+cHra+ta;
+ const pBasic=basic*factor, pHra=pBasic*hra/100, pDa=0, projected=pBasic+pHra+pDa+ta, diff=projected-current;
+ rBasic.textContent=money(basic);rDa.textContent=money(cDa);rHra.textContent=money(cHra);rTa.textContent=money(ta);
+ currentGross.textContent=money(current);pBasicEl.textContent=money(pBasic);pDaEl.textContent=money(pDa);pHraEl.textContent=money(pHra);pTaEl.textContent=money(ta);
+ projectedGross.textContent=money(projected);difference.textContent=(diff>=0?'+':'')+money(diff)+' / month';annual.textContent=(diff>=0?'+':'')+money(diff*12)+' / year';
+ difference.className='diff '+(diff>=0?'positive':'');
+}
+const basicEl=document.getElementById('basic'),daEl=document.getElementById('da'),hraEl=document.getElementById('hra'),taEl=document.getElementById('ta'),factorEl=document.getElementById('factor');
+const rBasic=document.getElementById('rBasic'),rDa=document.getElementById('rDa'),rHra=document.getElementById('rHra'),rTa=document.getElementById('rTa'),currentGross=document.getElementById('currentGross'),pBasicEl=document.getElementById('pBasic'),pDaEl=document.getElementById('pDa'),pHraEl=document.getElementById('pHra'),pTaEl=document.getElementById('pTa'),projectedGross=document.getElementById('projectedGross'),difference=document.getElementById('difference'),annual=document.getElementById('annual');
+document.getElementById('calc').onclick=calc;ids.forEach(id=>document.getElementById(id).addEventListener('input',calc));document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{factorEl.value=b.dataset.f;calc()});calc();
+</script>
+</body></html>

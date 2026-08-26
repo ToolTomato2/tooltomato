@@ -3,28 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ToolTomato — Free Online Calculators, Image & PDF Tools</title>
-<meta name="description" content="Free, fast, no-signup online tools: calculators, image compressor & resizer, PDF tools and more. Everything runs in your browser.">
+<title>ToolTomato — Free Online Tools for Everyday Problems</title>
+<meta name="description" content="Free online calculators, image tools, PDF tools and everyday utilities. Fast, simple and no signup required.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="ToolTomato — Free Online Tools">
-<meta property="og:description" content="Free, fast, no-signup calculators, image tools and PDF tools. Everything runs in your browser.">
+<meta property="og:description" content="Free calculators, image tools, PDF tools and everyday utilities in one place.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="favicon.svg">
-  <meta name="google-site-verification" content="1_XCh-gieFvHXXN-q3vu7f3iyWCDjVliQDj2Jto3VTc" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
 <header class="site-header">
   <div class="nav-wrap">
     <a href="index.html" class="brand"><span class="seal">🍅</span> Tool<span class="tomato-text">Tomato</span></a>
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
     <nav class="main-nav">
-      <a href="index.html#calculators">Calculators</a>
-      <a href="index.html#image-tools">Image Tools</a>
-      <a href="index.html#pdf-tools">PDF Tools</a>
+      <a href="#categories">Categories</a>
+      <a href="#popular">Popular</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
@@ -32,164 +28,95 @@
 </header>
 
 <section class="hero">
-  <span class="eyebrow">100% Free · No Sign-up</span>
-  <h1>Everyday tools,<br>ripened for speed.</h1>
-  <p class="sub">Calculators, image tools and PDF tools that run right in your browser. No uploads to a server, no accounts, no cost.</p>
+  <span class="eyebrow">🍅 Free tools for everyday problems</span>
+  <h1>Har kaam ka tool,<br><span class="accent">ek hi jagah.</span></h1>
+  <p class="sub">Calculators, image tools, PDF tools and useful utilities — simple, fast and free.</p>
 
-  <form class="search-box" role="search">
-    <input type="text" id="tool-search-input" placeholder="Search a tool — e.g. BMI, EMI, image compressor" aria-label="Search tools">
+  <form class="search-box" id="tool-search-form" role="search">
+    <input type="text" id="tool-search-input" placeholder="🔎 Search a tool — e.g. GST, EMI, BMI" aria-label="Search tools">
     <button type="submit">Search</button>
   </form>
-  <p class="no-results">No tool matched that search yet — more tools are added every week.</p>
+  <p class="no-results">No matching tool found. Try another keyword.</p>
+
+  <div class="quick-pills">
+    <a href="age-calculator.html">🔥 Age Calculator</a>
+    <a href="percentage-calculator.html">🔥 Percentage</a>
+    <a href="gst-calculator.html">✨ GST</a>
+  </div>
+
+  <div class="stats-badge">
+    <div><strong>15+</strong><span>Live Tools</span></div>
+    <div><strong>6</strong><span>Tool Groups</span></div>
+    <div><strong>100%</strong><span>Free</span></div>
+  </div>
 </section>
 
-<section class="section" id="calculators">
+<section class="section" id="categories">
   <div class="container">
     <div class="section-head">
-      <h2>Calculators</h2>
+      <h2>Browse by <span class="accent">Category</span></h2>
+      <p>Pick a category and get straight to the tool you need.</p>
     </div>
-    <div class="grid">
-      <a href="age-calculator.html" class="card" data-tool-card data-name="age calculator">
-        <div class="icon">🎂</div>
-        <h3>Age Calculator</h3>
-        <p>Find exact age in years, months and days.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
-      <a href="percentage-calculator.html" class="card" data-tool-card data-name="percentage calculator">
-        <div class="icon">%</div>
-        <h3>Percentage Calculator</h3>
-        <p>Quick percentage, increase & decrease calculations.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
-      <a href="discount-calculator.html" class="card" data-tool-card data-name="discount calculator">
-        <div class="icon">🏷️</div>
-        <h3>Discount Calculator</h3>
-        <p>Work out sale price and amount saved.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
-      <a href="bmi-calculator.html" class="card" data-tool-card data-name="bmi calculator">
-        <div class="icon">⚖️</div>
-        <h3>BMI Calculator</h3>
-        <p>Check your Body Mass Index in seconds.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
-      <a href="gst-calculator.html" class="card" data-tool-card data-name="gst calculator">
-        <div class="icon">🧾</div>
-        <h3>GST Calculator</h3>
-        <p>Add or remove GST from any amount.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
-      <a href="emi-loan-sip.html" class="card" data-tool-card data-name="emi calculator loan sip">
-        <div class="icon">💰</div>
-        <h3>EMI / Loan / SIP</h3>
-        <p>Plan loans and investments ahead of time.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
+
+    <div class="category-grid">
+      <a class="category-card" href="#popular"><div class="cicon">🧮</div><div><h3>Calculators</h3><p>Age, percentage, discount, BMI & GST</p><span>5 live tools →</span></div></a>
+      <a class="category-card" href="#popular"><div class="cicon">💰</div><div><h3>Loans & Finance</h3><p>EMI, loan & SIP calculations</p><span>Finance tools →</span></div></a>
+      <a class="category-card" href="#popular"><div class="cicon">🖼️</div><div><h3>Image Tools</h3><p>Compress, convert, crop & resize</p><span>4 live tools →</span></div></a>
+      <a class="category-card" href="#popular"><div class="cicon">📄</div><div><h3>PDF Tools</h3><p>JPG to PDF, merge & compress</p><span>3 live tools →</span></div></a>
+      <a class="category-card" href="#popular"><div class="cicon">🔧</div><div><h3>Utilities</h3><p>Word counter, QR generator & more</p><span>2 live tools →</span></div></a>
+      <div class="category-card coming"><div class="cicon">🇮🇳</div><div><h3>Govt & Tax <b>Coming Soon</b></h3><p>Pay, pension, tax and government tools</p><span>Roadmap →</span></div></div>
+      <div class="category-card coming"><div class="cicon">📚</div><div><h3>Education <b>Coming Soon</b></h3><p>Grades, CGPA and student utilities</p><span>Roadmap →</span></div></div>
+      <div class="category-card coming"><div class="cicon">🏏</div><div><h3>Sports <b>Coming Soon</b></h3><p>Cricket and match-day calculators</p><span>Roadmap →</span></div></div>
     </div>
   </div>
 </section>
 
-<section class="section" id="image-tools">
+<section class="section popular-section" id="popular">
   <div class="container">
-    <div class="section-head"><h2>Image Tools</h2></div>
-    <div class="grid">
-      <a href="image-compressor.html" class="card" data-tool-card data-name="image compressor">
-        <div class="icon">🖼️</div>
-        <h3>Image Compressor</h3>
-        <p>Shrink image size without losing quality.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
-      <a href="image-resizer.html" class="card" data-tool-card data-name="image resizer">
-        <div class="icon">📐</div>
-        <h3>Image Resizer</h3>
-        <p>Resize photos to exact dimensions.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
+    <div class="section-head">
+      <h2>Most <span class="accent">Popular</span></h2>
+      <p>Quick access to the tools already live on ToolTomato.</p>
+    </div>
+    <div class="popular-list">
+      <a href="age-calculator.html" class="popular-row" data-tool-card data-name="age calculator"><span class="picon">🎂</span><div><h3>Age Calculator</h3><p>Find exact age in years, months and days</p></div><span class="arrow">→</span></a>
+      <a href="percentage-calculator.html" class="popular-row" data-tool-card data-name="percentage calculator"><span class="picon">📊</span><div><h3>Percentage Calculator</h3><p>Calculate percentages quickly and easily</p></div><span class="arrow">→</span></a>
+      <a href="gst-calculator.html" class="popular-row" data-tool-card data-name="gst calculator"><span class="picon">🧾</span><div><h3>GST Calculator</h3><p>Add or remove GST from an amount</p></div><span class="arrow">→</span></a>
+      <a href="bmi-calculator.html" class="popular-row" data-tool-card data-name="bmi calculator"><span class="picon">⚖️</span><div><h3>BMI Calculator</h3><p>Check your Body Mass Index</p></div><span class="arrow">→</span></a>
+      <a href="discount-calculator.html" class="popular-row" data-tool-card data-name="discount calculator"><span class="picon">🏷️</span><div><h3>Discount Calculator</h3><p>Work out sale prices and savings</p></div><span class="arrow">→</span></a>
+      <a href="emi-loan-sip.html" class="popular-row" data-tool-card data-name="emi loan sip calculator"><span class="picon">💳</span><div><h3>EMI / Loan / SIP</h3><p>Calculate payments and investment estimates</p></div><span class="arrow">→</span></a>
+      <a href="image-compressor.html" class="popular-row" data-tool-card data-name="image compressor"><span class="picon">🖼️</span><div><h3>Image Compressor</h3><p>Reduce image size in your browser</p></div><span class="arrow">→</span></a>
+      <a href="jpg-to-pdf.html" class="popular-row" data-tool-card data-name="jpg to pdf"><span class="picon">📄</span><div><h3>JPG to PDF</h3><p>Convert images into PDF files</p></div><span class="arrow">→</span></a>
     </div>
   </div>
 </section>
 
-<section class="section" id="pdf-tools">
-  <div class="container">
-    <div class="section-head"><h2>PDF Tools</h2></div>
-    <div class="grid">
-      <a href="jpg-to-pdf.html" class="card" data-tool-card data-name="jpg to pdf">
-        <div class="icon">📄</div>
-        <h3>JPG to PDF</h3>
-        <p>Turn images into a single PDF file.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
-      <a href="merge-pdf.html" class="card" data-tool-card data-name="merge pdf">
-        <div class="icon">📎</div>
-        <h3>Merge PDF</h3>
-        <p>Combine multiple PDFs into one.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
-      <a href="pdf-compressor.html" class="card" data-tool-card data-name="pdf compressor">
-        <div class="icon">🗜️</div>
-        <h3>PDF Compressor</h3>
-        <p>Reduce PDF file size for easy sharing.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
-    </div>
+<section class="trust-section">
+  <p class="eyebrow-line">Built with simplicity in mind</p>
+  <h2>Why <span class="accent">ToolTomato?</span></h2>
+  <div class="trust-grid">
+    <div class="trust-item"><div class="emoji">🇮🇳</div><h3>Made for India</h3><p>Useful calculators and utilities designed around everyday Indian needs.</p></div>
+    <div class="trust-item"><div class="emoji">⚡</div><h3>Lightning Fast</h3><p>Lightweight pages and browser-based tools with minimal waiting.</p></div>
+    <div class="trust-item"><div class="emoji">🔒</div><h3>Privacy First</h3><p>Where a tool runs locally, your input can stay on your device.</p></div>
+    <div class="trust-item"><div class="emoji">🍅</div><h3>Free to Use</h3><p>No account is required for the core tools currently available.</p></div>
   </div>
 </section>
 
-<section class="section" id="utility-tools">
-  <div class="container">
-    <div class="section-head"><h2>Other Utilities</h2></div>
-    <div class="grid">
-      <a href="word-counter.html" class="card" data-tool-card data-name="word counter">
-        <div class="icon">🔤</div>
-        <h3>Word Counter</h3>
-        <p>Count words, characters and reading time.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
-      <a href="qr-code-generator.html" class="card" data-tool-card data-name="qr code generator">
-        <div class="icon">▦</div>
-        <h3>QR Code Generator</h3>
-        <p>Create a QR code for any link or text.</p>
-        <span class="badge" style="background:var(--stem-light);color:var(--stem);">Open tool</span>
-      </a>
-    </div>
-  </div>
-</section>
+<div class="cta-banner">
+  <h2>More tools are coming.</h2>
+  <p>We are expanding ToolTomato into a bigger everyday toolbox — one useful tool at a time.</p>
+  <a href="contact.html" class="btn">Request a Tool →</a>
+</div>
 
 <footer class="site-footer">
   <div class="footer-grid">
-    <div>
-      <h4>🍅 ToolTomato</h4>
-      <p style="color:#C9BDB8;font-size:0.85rem;max-width:320px;">Free online tools — calculators, image & PDF utilities. No sign-up, no cost, runs right in your browser.</p>
-    </div>
-    <div>
-      <h4>Company</h4>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
-    </div>
-    <div>
-      <h4>Legal</h4>
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="terms.html">Terms &amp; Conditions</a>
-      <a href="cookie-policy.html">Cookie Policy</a>
-      <a href="dmca.html">DMCA Policy</a>
-    </div>
+    <div><h4>🍅 ToolTomato</h4><p style="color:#C9BDB8;font-size:.85rem;max-width:320px;">Free online tools for calculations, images, PDFs and everyday tasks.</p></div>
+    <div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="disclaimer.html">Disclaimer</a><a href="affiliate-disclosure.html">Affiliate Disclosure</a></div>
+    <div><h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookie-policy.html">Cookie Policy</a><a href="dmca.html">DMCA Policy</a></div>
   </div>
-  <div class="footer-bottom">
-    <span>© 2026 ToolTomato. All rights reserved.</span>
-    <span>Made with 🍅 for quick everyday calculations.</span>
-  </div>
+  <div class="footer-bottom"><span>© 2026 ToolTomato. All rights reserved.</span><span>Made with 🍅 for useful everyday tools.</span></div>
 </footer>
 
-<div id="cookie-banner">
-  <p>We use cookies to improve your experience and, in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p>
-  <div class="actions">
-    <button id="cookie-decline">Decline</button>
-    <button id="cookie-accept">Accept</button>
-  </div>
-</div>
-
+<div id="cookie-banner"><p>We use cookies to improve your experience and, in future, to show ads. Read our <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="actions"><button id="cookie-decline">Decline</button><button id="cookie-accept">Accept</button></div></div>
 <script src="js/main.js"></script>
 </body>
 </html>
